@@ -19,6 +19,12 @@ In thunderbird, you can get to the `about:config` by going to
 `Edit -> Preferences`, then select the `Advanced` panel, and then select the
 `General` tab. Now click `Config Editor`.
 
+## Special Usage for Removing `Pocket`
+
+Before applying the Firefox user.js file, make sure to remove pocket from the
+toolbar first. After that is done you can apply the `browser.pocket.enabled`
+configuration.
+
 ## Thanks
 
 Thanks to
