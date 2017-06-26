@@ -1,7 +1,5 @@
 # Firefox Hardening
 
-NOTE: The thunderbird file will come at a later time
-
 This Repo contains a list of about:config settings that I have changed for both
 preferential reasons, and also privacy and security reasons.
 
