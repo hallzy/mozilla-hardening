@@ -1,4 +1,4 @@
-# Firefox Hardening
+# Mozilla Hardening
 
 This Repo contains a list of about:config settings that I have changed for both
 preferential reasons, and also privacy and security reasons.
