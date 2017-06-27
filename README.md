@@ -36,6 +36,10 @@ in which I found many of my current settings.
 Also thanks to [CHEF-KOCH](https://github.com/CHEF-KOCH)
 /
 [NoScript-Whitelist](https://github.com/CHEF-KOCH/NoScript-Whitelist)
-For their uBlock, and NoScript settings, which are a huge help. I will not be
-posting my configurations here as the license requires a list of changes.
-Regardless, most of the settings are from that repo.
+For their
+[uBlock](https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/),
+and
+[NoScript](https://addons.mozilla.org/en-US/firefox/addon/noscript/)
+settings, which are a huge help. I will not be posting my configurations here as
+the license requires a list of changes.  Regardless, most of the settings are
+from that repo.
