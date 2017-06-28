@@ -7,6 +7,14 @@ See the user.js file for my about:config settings.
 
 ## Usage
 
+### Windows VS Non-Windows Version
+
+The files are identical. The only difference is that the windows version has
+Windows friendly carriage returns. For operating systems other than windows, you
+can use the non windows js file.
+
+### General
+
 Please visit [User.js File](http://kb.mozillazine.org/User.js_file) for details
 on how to apply the user.js file to your install of Firefox.
 
