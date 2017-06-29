@@ -35,11 +35,16 @@ configuration.
 
 ## Thanks
 
-Thanks to
+Francois Marier for the
+[Firefox talk at LinuxFest NorthWest 2017](https://youtu.be/YDxq_9oVzDQ)
+
 [Haasn](https://github.com/haasn)
 for their about:config
 [gist](https://gist.github.com/haasn/69e19fc2fe0e25f3cff5)
 in which I found many of my current settings.
+
+[ghacks](https://www.ghacks.net/2015/08/18/a-comprehensive-list-of-firefox-privacy-and-security-settings/)
+list of Firefox security and privacy settings
 
 Also thanks to [CHEF-KOCH](https://github.com/CHEF-KOCH)
 /
