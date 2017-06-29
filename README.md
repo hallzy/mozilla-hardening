@@ -1,7 +1,17 @@
 # Mozilla Hardening
 
+Please remember to backup your prefs.js file before adding the user.js file to
+your profile! If these configs break websites that you frequent it will be
+harder to undo if you don't backup the prefs.js file.
+
 This Repo contains a list of about:config settings that I have changed for both
 preferential reasons, and also privacy and security reasons.
+
+A lot of the settings from these files have come from ghacks list of settings
+(reference at the bottom). At this point my settings are up to date with ghacks
+list version 0.11 updated February 2017 (which at the time of writing, is the
+most up to date version). I have skipped over settings I feel are not necessary
+for me, or would eliminate the use of websites that I use on a daily basis.
 
 See the user.js file for my about:config settings.
 

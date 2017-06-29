@@ -61,10 +61,14 @@ user_pref("ghacks_user.js.parrot", "GEOLOCATION BEGIN");
 user_pref("geo.enabled", false);
 // Don't locate me google. Set it to a blank string
 user_pref("geo.wifi.uri", "https://127.0.0.1");
-// user_pref("geo.wifi.logging.enabled", false); // (hidden pref)
-// user_pref("browser.search.geoip.url", "");
-// user_pref("geo.wifi.xhr.timeout", 1);
-// user_pref("browser.search.geoip.timeout", 1);
+// disables Firefox from logging geolocation requests
+user_pref("geo.wifi.logging.enabled", false); // (hidden pref)
+// This is for firefox to find out where you are to give you a location
+// appropriate search engine. Set it to an empty string to remove feature
+user_pref("browser.search.geoip.url", "");
+// requests have a timeout of 1 in order to minimize giving away location
+user_pref("geo.wifi.xhr.timeout", 1);
+user_pref("browser.search.geoip.timeout", 1);
 // *****************************************************************************
 
 
@@ -75,17 +79,17 @@ user_pref("ghacks_user.js.parrot", "QUIETFOX1 BEGIN");
 // Disable Mozilla gathering telemetry data
 user_pref("toolkit.telemetry.unified", false);
 user_pref("toolkit.telemetry.enabled", false);
-// user_pref("toolkit.telemetry.unifiedIsOptIn", true); // (hidden pref)
-// user_pref("toolkit.telemetry.server", "");
-// user_pref("toolkit.telemetry.archive.enabled", false);
+user_pref("toolkit.telemetry.unifiedIsOptIn", true); // (hidden pref)
+user_pref("toolkit.telemetry.server", "");
+user_pref("toolkit.telemetry.archive.enabled", false);
 user_pref("datareporting.healthreport.uploadEnabled", false);
-// user_pref("datareporting.healthreport.documentServerURI", ""); // (hidden pref)
-// user_pref("datareporting.healthreport.service.enabled", false); // (hidden pref)
-// user_pref("datareporting.healthreport.about.reportUrl", "data:text/plain,");
-// user_pref("datareporting.policy.dataSubmissionEnabled", false);
-// user_pref("toolkit.telemetry.cachedClientID", "");
-// user_pref("browser.selfsupport.enabled", false); // (hidden pref)
-// user_pref("browser.selfsupport.url", "");
+user_pref("datareporting.healthreport.documentServerURI", ""); // (hidden pref)
+user_pref("datareporting.healthreport.service.enabled", false); // (hidden pref)
+user_pref("datareporting.healthreport.about.reportUrl", "data:text/plain,");
+user_pref("datareporting.policy.dataSubmissionEnabled", false);
+user_pref("toolkit.telemetry.cachedClientID", "");
+user_pref("browser.selfsupport.enabled", false); // (hidden pref)
+user_pref("browser.selfsupport.url", "");
 // Disable experiemts. Experiments allow Firefox to download and run restartless
 // addons
 user_pref("experiments.enabled", false);
@@ -99,11 +103,11 @@ user_pref("breakpad.reportURL", "");
 // This makes it so that firefox does not give you recommended pages on a new
 // tab screen
 user_pref("browser.newtabpage.enabled", false);
-// user_pref("browser.newtab.preload", false);
-// user_pref("browser.newtabpage.directory.ping", "data:text/plain,");
-// user_pref("browser.newtabpage.directory.source", "data:text/plain,");
-// user_pref("browser.newtabpage.enhanced", false);
-// user_pref("browser.newtabpage.introShown", true);
+user_pref("browser.newtab.preload", false);
+user_pref("browser.newtabpage.directory.ping", "data:text/plain,");
+user_pref("browser.newtabpage.directory.source", "data:text/plain,");
+user_pref("browser.newtabpage.enhanced", false);
+user_pref("browser.newtabpage.introShown", true);
 // disable "Snippets" (Mozilla content shown on about:home screen) MUST use
 // HTTPS - arbitrary content injected into this page via http opens up MiTM
 // attacks
@@ -166,9 +170,6 @@ user_pref("network.dns.disablePrefetchFromHTTPS", true); // (hidden pref)
 // pre-connects to those things. Also stores information in a database that can
 // get up to 150MB in size.
 user_pref("network.predictor.enabled", false);
-// disable more Necko/Captive Portal
-// user_pref("captivedetect.canonicalURL", "");
-// user_pref("network.captive-portal-service.enabled", false); // (FF52+?)
 // When you hover over a link in a web browser, firefox makes a tcp and ssl
 // connection to that address in order to speed up the connection in case you
 // happen to click on it. Spammers can use this by sending emails to you, you
@@ -417,24 +418,35 @@ user_pref("ghacks_user.js.parrot", "PLUGINS BEGIN");
 // disable audio auto-play in non-active tabs (FF51+)
 user_pref("media.block-autoplay-until-in-foreground", true);
 // disable all GMP (Gecko Media Plugins)
+// Authorizes codecs for encrypted media. Disabling may break things, so I will
+// leave it alone. Just leaving it here for future reference
 // user_pref("media.gmp-provider.enabled", false);
 // user_pref("media.gmp.trial-create.enabled", false);
-// // disable widevine CDM
+// disable widevine CDM
+// It looks like this is needed for Netflix, and other DRM stuff. Therefore
+// disabling could result in broken websites. Not disabling, just leaving it
+// here for future reference
 // user_pref("media.gmp-widevinecdm.visible", false);
 // user_pref("media.gmp-widevinecdm.enabled", false);
 // user_pref("media.gmp-widevinecdm.autoupdate", false);
-// // disable all DRM content (EME: Encryption Media Extension)
+// disable all DRM content (EME: Encryption Media Extension)
+// No real reason to disable, other than the fact that DRM is stupid. But it
+// could break sites if disabled possibly.
 // user_pref("media.eme.enabled", false);
 // user_pref("browser.eme.ui.enabled", false);
-// // block websites detecting DRM is disabled
+// block websites detecting DRM is disabled
+// I am not disabling DRM, so no point in setting this
 // user_pref("media.eme.apiVisible", false);
-// // disable the OpenH264 Video Codec by Cisco to "Never Activate"
-// // This is the bundled codec used for video chat in WebRTC
-// // Disable pings to the external update/download server
+// disable the OpenH264 Video Codec by Cisco to "Never Activate"
+// This is the bundled codec used for video chat in WebRTC
+// Disable pings to the external update/download server
+// While it is used with WebRTC, I have already disabled WebRTC, and it is
+// possible these codecs may be needed for other media. So I won't disable
 // user_pref("media.gmp-gmpopenh264.enabled", false); // (hidden pref)
 // user_pref("media.gmp-gmpopenh264.autoupdate", false);
 // user_pref("media.gmp-manager.url", "data:text/plain,");
-// // disable the Adobe EME "Primetime CDM" (Content Decryption Module)
+// disable the Adobe EME "Primetime CDM" (Content Decryption Module)
+// Won't disable again, since this could be needed for certain online media.
 // user_pref("media.gmp-eme-adobe.enabled", false);
 // user_pref("media.gmp-eme-adobe.visible", false);
 // user_pref("media.gmp-eme-adobe.autoupdate", false);
