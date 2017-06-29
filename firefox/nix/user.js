@@ -752,9 +752,6 @@ user_pref("ghacks_user.js.parrot", "FIRST PARTY ISOLATION BEGIN");
 // *** TOR UPLIFT ***
 // *****************************************************************************
 user_pref("ghacks_user.js.parrot", "TOR UPLIFT BEGIN");
-// hide the contents of navigator.plugins and navigator.mimeTypes (FF50+)
-// https://bugzilla.mozilla.org/show_bug.cgi?id=1281963
-user_pref("privacy.resistFingerprinting", true); // (hidden pref)
 // *****************************************************************************
 
 
