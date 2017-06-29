@@ -23,16 +23,35 @@
 
 // This pref is only used to show how far this configuration was parsed in the
 // event of a syntax error.
+
+// Table of Contents:
+// *****************************************************************************
+// Geolocation
+// Quiet Fox1
+// Quiet Fox2
+// Block Implicit Outbound
+// Location Bar / Search/ Auto Suggestions / History / Forms Etc
+// Passwords
+// Cache
+// Ssl / Oscp / Certs / Encryption / Hsts / Hpkp / Https
+// Fonts
+// Headers / Referers
+// Plugins
+// Media / Camera / Mic
+// Ui
+// Service Workers
+// Dom And Javascript
+// Hardware Fingerprinting
+// Misc - Leaks / Fingerprinting / Privacy / Security
+// First Party Isolation
+// Tor Uplift
+// Cookies And Dom Storage
+// Shutdown
+// Personal Settings
+// Possibly Deprecated
+// *****************************************************************************
+
 user_pref("ghacks_user.js.parrot", "STARTING");
-
-// *****************************************************************************
-// *** PREFERENCES ***
-// *****************************************************************************
-user_pref("ghacks_user.js.parrot", "PREFERENCES BEGIN");
-// This makes it so you can press backspace to go back a page
-user_pref("browser.backspace_action", 0);
-// *****************************************************************************
-
 
 // *****************************************************************************
 // *** GEOLOCATION ***
@@ -227,6 +246,9 @@ user_pref("browser.urlbar.oneOffSearches", false);
 // disable search reset (about:searchreset) (FF51+)
 user_pref("browser.search.reset.enabled", false);
 user_pref("browser.search.reset.whitelist", "");
+// only show english characters in urls. This will prevent me from being fooled
+// by some phishing sites.
+user_pref("network.IDN_show_punycode", true);
 // *****************************************************************************
 
 
@@ -383,7 +405,10 @@ user_pref("ghacks_user.js.parrot", "HEADERS AND REFERERS BEGIN");
 // disable referer from an SSL Website (no referrer header when going from an
 // https page to another https page)
 user_pref("network.http.sendSecureXSiteReferrer", false);
+// Don't let websites see where I came from
+user_pref("network.http.referer.XOriginPolicy", 1);
 // *****************************************************************************
+
 
 // *****************************************************************************
 // *** PLUGINS ***
@@ -795,25 +820,114 @@ user_pref("privacy.clearOnShutdown.siteSettings", false);
 // *** PERSONAL SETTINGS ***
 // *****************************************************************************
 user_pref("ghacks_user.js.parrot", "PERSONAL SETTINGS BEGIN");
+// disable closing browser with last tab
+user_pref("browser.tabs.closeWindowWithLastTab", false);
+// Make backspace go back a page
+// (0 = previous page, 1 = scroll up, 2 = do nothing)
+user_pref("browser.backspace_action", 0);
+// open new windows in a new tab instead
+// 1=current window, 2=new window, 3=most recent window
+user_pref("browser.link.open_newwindow", 3);
+// disable "Do you really want to leave this site?" popups
+user_pref("dom.disable_beforeunload", true);
+// don't open "page source" in a tab. The window used instead is cleaner
+user_pref("view_source.tab", false);
+// spellchecking:
+// 0=none, 1-multi-line controls, 2=multi-line & single-line controls
+user_pref("layout.spellcheckDefault", 1);
+// disable tab animation, speed things up a little
+user_pref("browser.tabs.animate", false);
+// disable fullscreeen animation. Test using F11.
+user_pref("browser.fullscreen.animate", false);
+// open links in a new tab immediately to the right of parent tab, not far right
+user_pref("browser.tabs.insertRelatedAfterCurrent", true);
 // *****************************************************************************
 
-
-
-
-
-
-
-
-// only show english characters in urls. This will prevent me from being fooled
-// by some phishing sites.
-user_pref("network.IDN_show_punycode", true);
-
-// Don't let websites see where I came from
-user_pref("network.http.referer.XOriginPolicy", 1);
-
+// *****************************************************************************
+// *** POSSIBLY DEPRECATED ***
+// *****************************************************************************
+user_pref("ghacks_user.js.parrot", "POSSIBLY DEPRECATED BEGIN");
+// possibly deprecated:
 // loop is the codename for Firefox Hello, which is a video-chat service created
 // by Mozilla. Not only do I not use it, but it uses WebRTC, which, as pointed
 // out in the previous point is not secure.
 // I had to add this manually. It seems FF Hello may have been scrapped, but in
 // case it comes back, I added the config anyways
 user_pref("loop.enabled", false);
+// *****************************************************************************
+
+
+// END: internal custom pref to test for syntax errors
+user_pref("ghacks_user.js.parrot", "END");
+
+
+
+// APPENDIX A: TEST SITES
+// Here is an exhaustive list of various websites in which to test your browser.
+// You should enable JS on these sites for the tests to present a worst-case
+// scenario. In reality, you should control JS and XSS (cross site scripting) on
+// sites with add-ons such as NoScript, uMatrix, uBlock Origin, among others, to
+// reduce the possibility of fingerprinting attacks.
+// url: http://www.ghacks.net/2015/12/28/the-ultimate-online-privacy-test-resource-list/
+
+// 01: Fingerprinting
+// Panopticlick      https://panopticlick.eff.org/
+// JoDonym           http://ip-check.info/?lang=en
+// Am I Unique?      https://amiunique.org/
+// Browserprint      https://browserprint.info/test
+
+
+// 02: Multiple Tests [single page]
+// Whoer             https://whoer.net/
+// 5who              http://5who.net/?type=extend
+// IP/DNS Leak       https://ipleak.net/
+// IP Duh            http://ipduh.com/anonymity-check/
+
+
+// 03: Multiple Tests [multi-page]
+// BrowserSpy.dk     http://browserspy.dk/
+// BrowserLeaks      https://www.browserleaks.com/
+// HTML Security     https://html5sec.org/
+// PC Flank          http://www.pcflank.com/index.htm
+
+
+// 04: Encryption / Ciphers / SSL/TLS / Certificates
+// BadSSL            https://badssl.com/
+// DCSec             https://cc.dcsec.uni-hannover.de/
+// Qualys SSL Labs   https://www.ssllabs.com/ssltest/viewMyClient.html
+// Fortify           https://www.fortify.net/sslcheck.html
+// How's My SSL      https://www.howsmyssl.com/
+// RC4               https://rc4.io/
+// Heartbleed        https://filippo.io/Heartbleed/
+// Freak Attack      https://freakattack.com/clienttest.html
+// Logjam            https://weakdh.org/
+// Symantec          https://cryptoreport.websecurity.symantec.com/checker/views/sslCheck.jsp
+
+
+// 05: Other
+// AudioContext      https://audiofingerprint.openwpm.com/
+// Battery           https://pstadler.sh/battery.js/
+// DNS Leak          https://www.dnsleaktest.com/
+// DNS Spoofability  https://www.grc.com/dns/dns.htm
+// Evercookie        https://samy.pl/evercookie/
+// Firefox Add-ons   http://thehackerblog.com/addon_scanner/
+// localStorage      http://www.filldisk.com/
+// HSTS Supercookie  http://www.radicalresearch.co.uk/lab/hstssupercookies
+// HSTS [sniffly]    https://zyan.scripts.mit.edu/sniffly/
+// HTML5             https://www.youtube.com/html5
+// Keyboard Events   https://w3c.github.io/uievents/tools/key-event-viewer.html
+// rel=noopener      https://mathiasbynens.github.io/rel-noopener/
+// Popup Killer      http://www.kephyr.com/popupkillertest/index.html
+// Popup Test        http://www.popuptest.com/
+// Redirects         https://jigsaw.w3.org/HTTP/300/Overview.html
+// Referer Headers   https://www.darklaunch.com/tools/test-referer
+// Resouce://URI     https://www.browserleaks.com/firefox
+// WebRTC IP Leak    https://www.privacytools.io/webrtc.html
+
+
+// 06: Safe Browsing, Tracking Protection
+// Attack            https://itisatrap.org/firefox/its-an-attack.html
+// Blocked           https://itisatrap.org/firefox/blocked.html
+// Malware           https://itisatrap.org/firefox/unwanted.html
+// Phishing          https://itisatrap.org/firefox/its-a-trap.html
+// Tracking          https://itisatrap.org/firefox/its-a-tracker.html
