@@ -420,6 +420,384 @@ user_pref("media.block-autoplay-until-in-foreground", true);
 // *** MEDIA / CAMERA / MIC ***
 // *****************************************************************************
 user_pref("ghacks_user.js.parrot", "MEDIA / CAMERA / MIC BEGIN");
+// disable WebRTC
+// This is an inter-browser communcation standard (WebRTC) that is a very
+// significant risk to privacy and can be used to break out of VPN tunnels and
+// proxies, and  leaks your IP address when using tor or a vpn
+user_pref("media.peerconnection.enabled", false);
+user_pref("media.peerconnection.use_document_iceservers", false);
+user_pref("media.peerconnection.video.enabled", false);
+user_pref("media.peerconnection.identity.enabled", false);
+user_pref("media.peerconnection.identity.timeout", 1);
+user_pref("media.peerconnection.turn.disable", true);
+// disable video capability for WebRTC
+user_pref("media.navigator.video.enabled", false);
+// disable WebGL, force bare minimum feature set if used & disable WebGL
+// extensions
+// Having webGL enabled can allow attackers to provide malicious code to a web
+// page and attack a GPU making the machine unusable. WebGL may also put a
+// user's data and privacy at risk.
+user_pref("webgl.disabled", true);
+user_pref("pdfjs.enableWebGL", false);
+user_pref("webgl.min_capability_mode", true);
+user_pref("webgl.disable-extensions", true);
+user_pref("webgl.disable-fail-if-major-performance-caveat", true);
+// don't make WebGL debug info available to websites
+user_pref("webgl.enable-debug-renderer-info", false);
+// two more webgl preferences (FF51+)
+user_pref("webgl.dxgl.enabled", false);
+user_pref("webgl.enable-webgl2", false);
+// disable speech recognition
+user_pref("media.webspeech.recognition.enable", false);
+user_pref("media.webspeech.synth.enabled", false);
+// disable screensharing. Still webRTC related
+user_pref("media.getusermedia.screensharing.enabled", false);
+user_pref("media.getusermedia.screensharing.allowed_domains", "");
+user_pref("media.getusermedia.screensharing.allow_on_old_platforms", false);
+user_pref("media.getusermedia.browser.enabled", false);
+user_pref("media.getusermedia.audiocapture.enabled", false);
+// Can be used to fingerprint you and track you. Also, just want to disable face
+// detection, and control of my webcam
+user_pref("camera.control.face_detection.enabled", false);
+// disable canvas capture stream
+user_pref("canvas.capturestream.enabled", false);
+// disable camera image capture
+user_pref("dom.imagecapture.enabled", false);
+// disable offscreen canvas
+user_pref("gfx.offscreencanvas.enabled", false);
+// *****************************************************************************
+
+
+// *****************************************************************************
+// *** UI ***
+// *****************************************************************************
+user_pref("ghacks_user.js.parrot", "UI BEGIN");
+// UI SPOOFING: disable scripts hiding or disabling the following on new windows
+// This is usually when clicking something opens up a smalle window that is less
+// useful. ie, doesn't have an address bar etc.
+user_pref("dom.disable_window_open_feature.location", true);
+user_pref("dom.disable_window_open_feature.menubar", true);
+user_pref("dom.disable_window_open_feature.resizable", true);
+user_pref("dom.disable_window_open_feature.status", true);
+user_pref("dom.disable_window_open_feature.toolbar", true);
+// POPUP windows - prevent or allow javascript UI meddling
+user_pref("dom.disable_window_flip", true); // window z-order
+user_pref("dom.disable_window_move_resize", true);
+user_pref("dom.disable_window_open_feature.close", true);
+user_pref("dom.disable_window_open_feature.minimizable", true);
+user_pref("dom.disable_window_open_feature.personalbar", true);
+user_pref("dom.disable_window_open_feature.titlebar", true);
+user_pref("dom.disable_window_status_change", true);
+user_pref("dom.allow_scripts_to_close_windows", false);
+// 2204: disable links opening in a new window
+// test url: https://people.torproject.org/~gk/misc/entire_desktop.html
+// You can still right click a link and select open in a new window
+// This is to stop malicious window sizes and screen res leaks etc
+// Also, it is just annoying when websites open up new windows for you.
+user_pref("browser.link.open_newwindow.restriction", 0);
+// *****************************************************************************
+
+
+// *****************************************************************************
+// *** SERVICE WORKERS ***
+// *****************************************************************************
+user_pref("ghacks_user.js.parrot", "SERVICE WORKERS BEGIN");
+// disable workers API and service workers API
+// Service Workers are basically background tasks that a website does to offer
+// up push notifications etc to alert you of things. As far as I know, usually
+// used on social networking sites.
+// WARNING: WILL break sites as this gains traction: eg mega.nz requires workers
+user_pref("dom.workers.enabled", false);
+user_pref("dom.serviceWorkers.enabled", false);
+// disable service workers cache and cache storage
+user_pref("dom.caches.enabled", false);
+// disable push notifications (FF44+) [requires serviceWorkers to be enabled]
+// web apps can receive messages pushed to them from a server, whether or
+// not the web app is in the foreground, or even currently loaded
+// WARNING: may affect social media sites like Twitter
+user_pref("dom.push.enabled", false);
+user_pref("dom.push.connection.enabled", false);
+user_pref("dom.push.serverURL", "");
+user_pref("dom.push.userAgentID", "");
+// disable web/push notifications
+// WARNING: may affect social media sites like Twitter
+user_pref("dom.webnotifications.enabled", false);
+user_pref("dom.webnotifications.serviceworker.enabled", false);
+// *****************************************************************************
+
+
+// *****************************************************************************
+// *** DOM AND JAVASCRIPT ***
+// *****************************************************************************
+user_pref("ghacks_user.js.parrot", "DOM AND JAVASCRIPT BEGIN");
+// disable website access to clipboard events/content
+// Sends notifications to websites when a user copies, pastes, or cuts something
+// from a webpage.
+// WARNING: This will break some sites functionality such as pasting into
+// Facebook this applies to onCut, onCopy, onPaste events - i.e is you have to
+// interact with the website for it to look at the clipboard
+user_pref("dom.event.clipboardevents.enabled", false);
+// disable clipboard commands (cut/copy) from "non-priviledged" content
+// this disables document.execCommand("cut"/"copy") to protect your clipboard
+// Essentially Disables js from accessing the clipboard
+user_pref("dom.allow_cut_copy", false); // (hidden pref)
+// 2404: disable JS storing data permanently
+// WARNING: If set as false (disabled), this WILL break some [old] add-ons and
+// DOES break a lot of sites' functionality. Applies to websites, add-ons and
+// session data.
+user_pref("dom.indexedDB.enabled", false);
+// https://wiki.mozilla.org/WebAPI/Security/WebTelephony
+// allows phone calls. Issues arise with the possiblity of calls to high cost
+// numbers, susceptible to spying (man in the middle)
+user_pref("dom.telephony.enabled", false);
+// disable User Timing API
+// This can be used to fingerprint and track you
+// Disables timer - can be used to check how long an image (for example) takes
+// to load. If it is quick, it was probably cached, and tells the website I have
+// probably visited a site with that image recently.
+user_pref("dom.enable_user_timing", false);
+user_pref("dom.enable_resource_timing", false);
+user_pref("dom.enable_performance", false);
+// disable shaking the screen
+user_pref("dom.vibrator.enabled", false);
+// 2415: max popups from a single non-click event - default is 20!
+// NOTE: setting this too low could have unforseen consequences. Some new
+// windows that are opened legitimately may be counted towards this count. 20 is
+// quite high though, so lower it to around 2-5 ish.
+user_pref("dom.popup_maximum", 3);
+// limit events that can cause a popup
+// default is "change click dblclick mouseup notificationclick reset submit touchend"
+// http://kb.mozillazine.org/Dom.popup_allowed_events
+user_pref("dom.popup_allowed_events", "click dblclick");
+// disable idle observation
+user_pref("dom.idle-observers-api.enabled", false);
+// disable support for asm.js ( http://asmjs.org/ )
+// asm.js has had security concerns in the past. Specifically out of bounds read
+// and writes that can be exploited. See below links
+// https://www.mozilla.org/en-US/security/advisories/mfsa2015-29/
+// https://www.mozilla.org/en-US/security/advisories/mfsa2015-50/
+user_pref("javascript.options.asmjs", false);
+// disable ArchiveAPI i.e reading content of archives, such as zip files,
+// directly in the browser, through DOM file objects. Default is false.
+user_pref("dom.archivereader.enabled", false);
+// force FF to tell you if a website asks to store data for offline use
+user_pref("offline-apps.allow_by_default", false);
+user_pref("browser.offline-apps.notify", true);
+// *****************************************************************************
+
+
+// *****************************************************************************
+// *** HARDWARE FINGERPRINTING ***
+// *****************************************************************************
+user_pref("ghacks_user.js.parrot", "HARDWARE FINGERPRINTING BEGIN");
+// disable gamepad API - USB device ID enumeration
+// Allows JS to identify a gaming controller etc to track you.
+// https://trac.torproject.org/projects/tor/ticket/13023
+user_pref("dom.gamepad.enabled", false);
+// disable Battery Status API. Initially a Linux issue (high precision readout)
+// that is now fixed. However, it is still another metric for fingerprinting
+// NOTE: From FF52+ Battery Status API is only available in chrome/privileged code.
+// http://techcrunch.com/2015/08/04/battery-attributes-can-be-used-to-track-web-users/
+// https://www.theguardian.com/technology/2016/aug/02/battery-status-indicators-tracking-online
+user_pref("dom.battery.enabled", false);
+// disable giving away network info
+// eg bluetooth, cellular, ethernet, wifi, wimax, other, mixed, unknown, none
+user_pref("dom.netinfo.enabled", false);
+// disable virtual reality devices
+// No intention of ever using VR anyways
+user_pref("dom.vr.enabled", false);
+user_pref("dom.vr.oculus.enabled", false);
+user_pref("dom.vr.osvr.enabled", false); // (FF49+)
+user_pref("dom.vr.openvr.enabled", false); // (FF51+)
+// disable media device enumeration (FF29+)
+// This would let a website know what kind of input and output devices I have
+user_pref("media.navigator.enabled", false);
+// disable video statistics - JS performance fingerprinting
+user_pref("media.video_stats.enabled", false);
+// 2507: disable keyboard fingerprinting (FF38+) (physical keyboards)
+// The Keyboard API allows tracking the "read parameter" of pressed keys in
+// forms on web pages. These parameters vary between types of keyboard layouts
+// and between various languages, eg German vs English.
+// WARNING: Don't use if Android + physical keyboard
+user_pref("dom.keyboardevent.code.enabled", false);
+user_pref("dom.beforeAfterKeyboardEvent.enabled", false);
+user_pref("dom.keyboardevent.dispatch_during_composition", false);
+// disable touch events
+// fingerprinting attack vector - leaks screen res & actual screen coordinates
+// WARNING: If you use touch screens, reset this to the default
+user_pref("dom.w3c_touch_events.enabled", 0);
+// 2510: disable Web Audio API (FF51+)
+// disables this api which is basically never used legitimately, but is used to
+// track and fingerprint you sometimes.
+user_pref("dom.webaudio.enabled", false);
+// disable MediaDevices change detection (FF51+) (enabled by default starting
+// FF52+). This triggers an event whenever a media device is added or removed
+// from your computer
+user_pref("media.ondevicechange.enabled", false);
+// *****************************************************************************
+
+
+// *****************************************************************************
+// *** MISC - LEAKS / FINGERPRINTING / PRIVACY / SECURITY ***
+// *****************************************************************************
+user_pref("ghacks_user.js.parrot", "MISC LEAKS FINGERPRINTING ETC BEGIN");
+// disable sending additional analytics to web servers
+user_pref("beacon.enabled", false);
+// disable downloading on desktop
+user_pref("browser.download.folderList", 2);
+// always ask the user where to download - enforce user interaction for security
+user_pref("browser.download.useDownloadDir", false);
+// Delete temp files when you exit
+user_pref("browser.helperApps.deleteTempFileOnExit", true);
+// don't integrate activity into windows recent documents
+user_pref("browser.download.manager.addToRecentDocs", false);
+// disable page thumbnail collection
+user_pref("browser.pagethumbnails.capturing_disabled", true); // (hidden pref)
+// 2608: disable JAR from opening Unsafe File Types
+user_pref("network.jar.open-unsafe-types", false);
+// 2611: disable WebIDE to prevent remote debugging and add-on downloads
+user_pref("devtools.webide.autoinstallADBHelper", false);
+user_pref("devtools.webide.autoinstallFxdtAdapters", false);
+user_pref("devtools.debugger.remote-enabled", false);
+user_pref("devtools.webide.enabled", false);
+// disable SimpleServiceDiscovery - which can bypass proxy settings - eg Roku
+user_pref("browser.casting.enabled", false);
+user_pref("gfx.layerscope.enabled", false);
+// disable gyroscope and ambient light sensor readings. Apparently gyrscope data
+// can be used to determine sound and voice, and there is a security
+// vulberability with the ambient light stuff. Fingerprinting vector
+user_pref("device.sensors.enabled", false);
+// disable SPDY as it can contain identifiers
+// Looks like SPDY is now deprecated anyways, so block it anyways.
+user_pref("network.http.spdy.enabled", false);
+user_pref("network.http.spdy.enabled.deps", false);
+// 2615: disable http2 for now as well
+user_pref("network.http.spdy.enabled.http2", false);
+// 2617: disable pdf.js as an option to preview PDFs within Firefox
+// see mime-types under Options>Applications) - EXPLOIT risk
+// Enabling this (set to true) will change your option most likely to "Ask" or
+// "Open with some external pdf reader". This does NOT necessarily prevent
+// pdf.js being used via other means, it only removes the option. I think this
+// should be left at default (false). 1. It won't stop JS bypassing it. 2.
+// Depending on external pdf viewers there is just as much risk or more
+// (acrobat). 3. Mozilla are very quick to patch these sorts of exploits, they
+// treat them as severe/critical and 4. for convenience
+// So leave it as false. But may as well block pdf.js in NoScript as it doesn't
+// affect the viewing of PDFs
+user_pref("pdfjs.disabled", false);
+// when using SOCKS have the proxy server do the DNS lookup - dns leak issue
+// eg in TOR, this stops your local DNS server from knowing your Tor destination
+// as a remote Tor node will handle the DNS request
+user_pref("network.proxy.socks_remote_dns", true);
+// disable middle mouse click opening links from clipboard
+// https://trac.torproject.org/projects/tor/ticket/10089
+// http://kb.mozillazine.org/Middlemouse.contentLoadURL
+user_pref("middlemouse.contentLoadURL", false);
+// ensure you have a security delay when installing add-ons (milliseconds)
+// default=1000, This also covers the delay in "Save" on downloading files.
+// http://kb.mozillazine.org/Disable_extension_install_delay_-_Firefox
+// http://www.squarefree.com/2004/07/01/race-conditions-in-security-dialogs/
+user_pref("security.dialog_enable_delay", 1000);
+// ensure Strict File Origin Policy on local files
+// The default is true. Included for completeness
+// http://kb.mozillazine.org/Security.fileuri.strict_origin_policy
+user_pref("security.fileuri.strict_origin_policy", true);
+// Applications [non Tor protocol] SHOULD generate an error
+// upon the use of .onion and SHOULD NOT perform a DNS lookup.
+user_pref("network.dns.blockDotOnion", true);
+// strip optional user agent token, default is false, included for completeness
+user_pref("general.useragent.compatMode.firefox", false);
+// disable UITour backend so there is no chance that a remote page can use it
+// Allows a site to change the browser UI to some extent
+user_pref("browser.uitour.enabled", false);
+user_pref("browser.uitour.url", "");
+// disable remote JAR files being opened, regardless of content type
+user_pref("network.jar.block-remote-files", true);
+// enforce separate content process for file://URLs (FF53+?)
+// secures local files better
+user_pref("browser.tabs.remote.separateFileUriProcess", true);
+// disable "open with" in download dialog (FF50+)
+user_pref("browser.download.forbid_open_with", true);
+// disable DeviceStorage API
+// This api is quite powerful
+// https://wiki.mozilla.org/WebAPI/DeviceStorageAPI
+user_pref("device.storage.enabled", false);
+// sanitize webchannel whitelist
+user_pref("webchannel.allowObject.urlWhitelist", "");
+// disable HTTP Alternative Services
+// This allows the browser to lie to you about what web address you are at
+user_pref("network.http.altsvc.enabled", false);
+user_pref("network.http.altsvc.oe", false);
+// disable various developer tools in browser context
+user_pref("devtools.chrome.enabled", false);
+// strip paths when sending URLs to PAC scripts (FF51+)
+// CVE-2017-5384: Information disclosure via Proxy Auto-Config (PAC)
+// https://bugzilla.mozilla.org/show_bug.cgi?id=1255474
+user_pref("network.proxy.autoconfig_url.include_path", false);
+// close bypassing of CSP via image mime types (FF51+)
+// https://bugzilla.mozilla.org/show_bug.cgi?id=1288361
+user_pref("security.block_script_with_wrong_mime", true);
+// *****************************************************************************
+
+
+// *****************************************************************************
+// *** FIRST PARTY ISOLATION ***
+// *****************************************************************************
+user_pref("ghacks_user.js.parrot", "FIRST PARTY ISOLATION BEGIN");
+// *****************************************************************************
+
+
+
+// *****************************************************************************
+// *** TOR UPLIFT ***
+// *****************************************************************************
+user_pref("ghacks_user.js.parrot", "TOR UPLIFT BEGIN");
+// hide the contents of navigator.plugins and navigator.mimeTypes (FF50+)
+// https://bugzilla.mozilla.org/show_bug.cgi?id=1281963
+user_pref("privacy.resistFingerprinting", true); // (hidden pref)
+// *****************************************************************************
+
+
+// *****************************************************************************
+// *** COOKIES AND DOM STORAGE ***
+// *****************************************************************************
+user_pref("ghacks_user.js.parrot", "COOKIES AND DOM STORAGE BEGIN");
+// Allow cookies from same host. Disabling cookies makes it a nightmare to sign
+// in to things like youtube
+// 0=allow all 1=allow same host 2=disallow all 3=allow 3rd party if it already
+// set a cookie
+user_pref("network.cookie.cookieBehavior", 1);
+// ensure that third-party cookies (if enabled, see above pref) are session-only
+user_pref("network.cookie.thirdparty.sessionOnly", true);
+// disable Storage API (FF51+) which gives sites' code the ability to find out
+// how much space they can use, how much they are already using, and even
+// control whether or not they need to be alerted before the user agent disposes
+// of site data in order to make room for other things.
+user_pref("dom.storageManager.enabled", false);
+// *****************************************************************************
+
+
+// *****************************************************************************
+// *** SHUTDOWN ***
+// *****************************************************************************
+user_pref("ghacks_user.js.parrot", "SHUTDOWN BEGIN");
+// enable FF to clear stuff on close
+user_pref("privacy.sanitize.sanitizeOnShutdown", true);
+// 2803: what to clear on shutdown
+user_pref("privacy.clearOnShutdown.cache", true);
+user_pref("privacy.clearOnShutdown.cookies", true);
+user_pref("privacy.clearOnShutdown.downloads", true);
+user_pref("privacy.clearOnShutdown.formdata", true);
+user_pref("privacy.clearOnShutdown.history", true);
+user_pref("privacy.clearOnShutdown.offlineApps", true);
+user_pref("privacy.clearOnShutdown.sessions", true); // active logins
+user_pref("privacy.clearOnShutdown.siteSettings", false);
+// *****************************************************************************
+
+// *****************************************************************************
+// *** PERSONAL SETTINGS ***
+// *****************************************************************************
+user_pref("ghacks_user.js.parrot", "PERSONAL SETTINGS BEGIN");
 // *****************************************************************************
 
 
@@ -429,53 +807,12 @@ user_pref("ghacks_user.js.parrot", "MEDIA / CAMERA / MIC BEGIN");
 
 
 
-
-
-// disable gyroscope and ambient light sensor readings. Apparently gyrscope data
-// can be used to determine sound and voice, and there is a security
-// vulberability with the ambient light stuff.
-user_pref("device.sensors.enabled", false);
-
-// disables this api which is basically never used legitimately, but is used to
-// track and fingerprint you sometimes.
-user_pref("dom.webaudio.enabled", false);
-
 // only show english characters in urls. This will prevent me from being fooled
 // by some phishing sites.
 user_pref("network.IDN_show_punycode", true);
 
-// Disables js from accessing the clipboard
-user_pref("dom.allow_cut_copy", false);
-
-// Disables timer - can be used to check how long an image (for example) takes
-// to load. If it is quick, it was probably cached, and tells the website I have
-// probably visited a site with that image recently.
-user_pref("dom.enable_performance", false);
-
 // Don't let websites see where I came from
 user_pref("network.http.referer.XOriginPolicy", 1);
-
-// Sends notifications to websites when a user copies, pastes, or cuts something
-// from a webpage. NOTE: making this change is known to break some websites such
-// as google docs. I have set this, but If I ever use google docs, I will need
-// to change this
-user_pref("dom.event.clipboardevents.enabled", false);
-
-// Disabling this will make it so that websites cannot see your battery status.
-// It turns out that the remaining battery life that is returned by this API is
-// of such detail that it can be used to fingerprint you and track you online
-user_pref("dom.battery.enabled", false);
-
-// Having webGL enabled can allow attackers to provide malicious code to a web
-// page and attack a GPU making the machine unusable. WebGL may also put a
-// user's data and privacy at risk.
-user_pref("webgl.disabled", true);
-
-
-// This is an inter-browser communcation standard (WebRTC) that is a very
-// significant risk to privacy and can be used to break out of VPN tunnels and
-// proxies, and  leaks your IP address when using tor or a vpn
-user_pref("media.peerconnection.enabled", false);
 
 // loop is the codename for Firefox Hello, which is a video-chat service created
 // by Mozilla. Not only do I not use it, but it uses WebRTC, which, as pointed
@@ -483,13 +820,3 @@ user_pref("media.peerconnection.enabled", false);
 // I had to add this manually. It seems FF Hello may have been scrapped, but in
 // case it comes back, I added the config anyways
 user_pref("loop.enabled", false);
-
-// Disable Beacons which seem to mainly be used for analytical reasons, ie. to
-// track you
-// This was already set in my about:config for some reason.
-user_pref("beacon.enabled", false);
-
-// Can be used to fingerprint you and track you. Also, just want to disable face
-// detection, and control of my webcam
-user_pref("camera.control.face_detection.enabled", false);
-
