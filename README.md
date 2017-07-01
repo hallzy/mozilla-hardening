@@ -62,7 +62,9 @@ An extension that attempts to force HTTPS on every webpage you visit.
 
 My settings are as follows:
 * Click the HTTPS Everywhere icon in your toolbar
-* Make sure that `block all unencrypted requests` is checked
+* Make sure that `block all unencrypted requests` is checked (I have noticed
+  that with this setting Firefox slows down a lot eventually to the point where
+it will not even load pages anymore. Choose this option if you so choose)
 * Go to the SSL Observatory Preferences
 * It is a good idea to enable this if you are comfortable doing so. EFF is
   trustworthy, and enabling this feature will help you to be more secure.
@@ -115,6 +117,15 @@ Spoofing will give the API information, but it will be false and different
 everytime the API asks for information. Your call.
 
 The Fake Readout (spoofing) is the default setting.
+
+### SSleuth
+
+This add-on just gives your HTTPS connection a grade from 0 to 10 and gives
+information about your connection.
+
+### Disconnect
+
+Blocks certain content, ads, and analytics.
 
 ## Special Usage for Removing `Pocket`
 
