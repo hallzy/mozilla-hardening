@@ -581,8 +581,9 @@ user_pref("dom.allow_cut_copy", false); // (hidden pref)
 // 2404: disable JS storing data permanently
 // WARNING: If set as false (disabled), this WILL break some [old] add-ons and
 // DOES break a lot of sites' functionality. Applies to websites, add-ons and
-// session data.
-user_pref("dom.indexedDB.enabled", false);
+// session data. This breaks google drive, so I am setting it to true, but if
+// you do not care about google drive then you can set it to false
+user_pref("dom.indexedDB.enabled", true);
 // https://wiki.mozilla.org/WebAPI/Security/WebTelephony
 // allows phone calls. Issues arise with the possiblity of calls to high cost
 // numbers, susceptible to spying (man in the middle)
