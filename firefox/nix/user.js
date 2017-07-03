@@ -853,6 +853,11 @@ user_pref("browser.tabs.animate", false);
 user_pref("browser.fullscreen.animate", false);
 // open links in a new tab immediately to the right of parent tab, not far right
 user_pref("browser.tabs.insertRelatedAfterCurrent", true);
+// Disable proxy in firefox by default
+// Useful on Windows if you are wanting to disable IE by changing the Windows
+// proxy settings.
+// http://kb.mozillazine.org/Network.proxy.type
+user_pref("network.proxy.type", 0);
 // *****************************************************************************
 
 // *****************************************************************************
