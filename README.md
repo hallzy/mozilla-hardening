@@ -144,7 +144,9 @@ for their about:config
 in which I found many of my current settings.
 
 [ghacks](https://www.ghacks.net/2015/08/18/a-comprehensive-list-of-firefox-privacy-and-security-settings/)
-list of Firefox security and privacy settings
+list of Firefox security and privacy settings. This list is now updated on
+github:
+[ghacks-user.js](https://github.com/ghacksuserjs/ghacks-user.js)
 
 Also thanks to [CHEF-KOCH](https://github.com/CHEF-KOCH)
 /
