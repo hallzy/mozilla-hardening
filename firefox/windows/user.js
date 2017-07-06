@@ -69,6 +69,8 @@ user_pref("browser.search.geoip.url", "");
 // requests have a timeout of 1 in order to minimize giving away location
 user_pref("geo.wifi.xhr.timeout", 1);
 user_pref("browser.search.geoip.timeout", 1);
+// Disable geolocation on non-secure origins.
+user_pref("geo.security.allowinsecure", false);
 // *****************************************************************************
 
 
@@ -108,6 +110,8 @@ user_pref("browser.newtabpage.directory.ping", "data:text/plain,");
 user_pref("browser.newtabpage.directory.source", "data:text/plain,");
 user_pref("browser.newtabpage.enhanced", false);
 user_pref("browser.newtabpage.introShown", true);
+// Disable Activity Stream (system addon)
+user_pref.("browser.newtabpage.activity-stream.enabled", false);
 // disable "Snippets" (Mozilla content shown on about:home screen) MUST use
 // HTTPS - arbitrary content injected into this page via http opens up MiTM
 // attacks
@@ -234,6 +238,22 @@ user_pref("layout.css.visited_links_enabled", false);
 // disable displaying javascript in history URLs - SECURITY
 // This is default anyways as of Firefox 54.0
 user_pref("browser.urlbar.filter.javascript", true);
+// Disable search bar LIVE search suggestions - Privacy
+user_pref("browser.search.suggest.enabled", false);
+// Disable location bar LIVE search results
+// Also disable the location bar prompt to enable/disable or learn more about it
+user_pref("browser.urlbar.suggest.searches", false);
+user_pref("browser.urlbar.userMadeSearchSuggestionsChoice", true);
+// Disable location bar suggesting "preloaded" top websites
+user_pref("browser.urlbar.usepreloadedtopurls.enabled", false);
+// Disable location bar autocomplete
+user_pref("browser.urlbar.autocomplete.enabled", false);
+// Disable location bar suggestion types
+// NOTE: if an of these are true, the above pref will be true too. If all three
+// of these are false, the previous pref will be false.
+user_pref("browser.urlbar.suggest.history", false);
+user_pref("browser.urlbar.suggest.bookmark", false);
+user_pref("browser.urlbar.suggest.openpage", false);
 // disable search and form history
 // Leaving this commented so that forms still work. Just leaving it here so I
 // know it exists for future if I change my mind
@@ -250,6 +270,13 @@ user_pref("browser.search.reset.whitelist", "");
 // only show english characters in urls. This will prevent me from being fooled
 // by some phishing sites.
 user_pref("network.IDN_show_punycode", true);
+// Disable windows jumplists
+user_pref("browser.taskbar.lists.enabled", false);
+user_pref("browser.taskbar.lists.frequent.enabled", false);
+user_pref("browser.taskbar.lists.recent.enabled", false);
+user_pref("browser.taskbar.lists.tasks.enabled", false);
+// Disable windows taskbar preview
+user_pref("browser.taskbar.previews.enable", false);
 // *****************************************************************************
 
 
@@ -345,6 +372,10 @@ user_pref("security.tls.version.max", 4); // allow up to and including TLS 1.3
 // ECDH over DHE
 user_pref("security.ssl3.dhe_rsa_aes_128_sha", false);
 user_pref("security.ssl3.dhe_rsa_aes_256_sha", false);
+// Enable Mixed-Content-Blocker to use the HSTS cache but disable the HSTS
+// priming requests. HSTS is used to help force HTTPS to be used.
+user_pref("security.mixed_content.use_hsts", true);
+user_pref("security.mixed_content.send_hsts_priming", false);
 // disable or limit SHA-1
 // 0 = all SHA1 certs are allowed
 // 1 = all SHA1 certs are blocked (including perfectly valid ones from 2015 and
@@ -372,6 +403,10 @@ user_pref("security.ssl3.ecdhe_ecdsa_aes_128_sha", false);
 user_pref("security.ssl3.ecdhe_rsa_aes_128_sha", false);
 // disable insecure active content on https pages - mixed content
 user_pref("security.mixed_content.block_active_content", true);
+// Control "Add Security Exception" dialog on SSL warnings
+// 0=do neither, 1=pre populate url 2=pre-populate url and pre fetch cert (def)
+user_pref("browser.ssl_override_behavior", 1);
+user_pref("browser.xul.error_pages.expert_bad_cert", true);
 // *****************************************************************************
 
 
@@ -408,6 +443,11 @@ user_pref("ghacks_user.js.parrot", "HEADERS AND REFERERS BEGIN");
 user_pref("network.http.sendSecureXSiteReferrer", false);
 // Don't let websites see where I came from
 user_pref("network.http.referer.XOriginPolicy", 1);
+// Disable spoofing a referer
+// Spoofing increases your exposure to cross-site request forgeries
+user_pref("network.http.referer.spoofSource", false);
+// Hide (not spoof) referer when leaving a .onion domain
+user_pref("network.http.referer.hideOnionSource", true);
 // *****************************************************************************
 
 
@@ -467,8 +507,12 @@ user_pref("media.peerconnection.video.enabled", false);
 user_pref("media.peerconnection.identity.enabled", false);
 user_pref("media.peerconnection.identity.timeout", 1);
 user_pref("media.peerconnection.turn.disable", true);
+user_pref("media.peerconnection.ice.tcp", false);
 // disable video capability for WebRTC
 user_pref("media.navigator.video.enabled", false);
+// Limit WebRTC IP leaks if using WebRTC
+user_pref("media.peerconnection.ice.defaullt_address_only", true);
+user_pref("media.peerconnection.ice.no_host", true);
 // disable WebGL, force bare minimum feature set if used & disable WebGL
 // extensions
 // Having webGL enabled can allow attackers to provide malicious code to a web
@@ -672,6 +716,18 @@ user_pref("dom.webaudio.enabled", false);
 // FF52+). This triggers an event whenever a media device is added or removed
 // from your computer
 user_pref("media.ondevicechange.enabled", false);
+// Disable presentation API
+user_pref("dom.presentation.enabled", false):
+user_pref("dom.presentation.controller.enabled", false):
+user_pref("dom.presentation.discoverable", false):
+user_pref("dom.presentation.discovery.enabled", false):
+user_pref("dom.presentation.receiver.enabled", false):
+user_pref("dom.presentation.session_transport.data_channel.enable", false):
+// Disable site specific Zoom
+// Zoom levels affect screen res and are highly fingerprintable. This does not
+// stop you from using zoom, it will just not use/remember any site specific
+// settings.
+user_pref("browser.zoom.siteSpecific", false);
 // *****************************************************************************
 
 
@@ -809,6 +865,9 @@ user_pref("network.cookie.thirdparty.sessionOnly", true);
 // control whether or not they need to be alerted before the user agent disposes
 // of site data in order to make room for other things.
 user_pref("dom.storageManager.enabled", false);
+user_pref("browser.storageManager.enabled", false);
+// Disable HTTP sites from setting cookies with the "secure" directive
+user_pref("network.cookie.leave-secure-alone", true);
 // *****************************************************************************
 
 
