@@ -102,6 +102,15 @@ user_pref("experiments.activeExperiment", false);
 user_pref("network.allow-experiments", false);
 // Disable Crash-Reports
 user_pref("breakpad.reportURL", "");
+// disable Onboarding (FF55+)
+// Onboarding is an interactive tour/setup for new installs/profiles and
+// features. Every time about:home or about:newtab is opened, the onboarding
+// overlay is injected into that page
+user_pref("browser.onboarding.enabled", false);
+// disable Web Compatibility Reporter (FF56+)
+// Web Compatibility Reporter adds a "Report Site Issue" button to send data to
+// Mozilla
+user_pref("extensions.webcompat-reporter.enabled", false);
 // This makes it so that firefox does not give you recommended pages on a new
 // tab screen
 user_pref("browser.newtabpage.enabled", false);
@@ -918,6 +927,8 @@ user_pref("browser.tabs.insertRelatedAfterCurrent", true);
 // proxy settings.
 // http://kb.mozillazine.org/Network.proxy.type
 user_pref("network.proxy.type", 0);
+// disable Screenshots (FF55+)
+user_pref("extensions.screenshots.disabled", true);
 // *****************************************************************************
 
 // *****************************************************************************
