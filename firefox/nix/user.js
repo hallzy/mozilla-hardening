@@ -255,6 +255,8 @@ user_pref("browser.urlbar.suggest.searches", false);
 user_pref("browser.urlbar.userMadeSearchSuggestionsChoice", true);
 // Disable location bar suggesting "preloaded" top websites
 user_pref("browser.urlbar.usepreloadedtopurls.enabled", false);
+// disable location bar making speculative connections (FF56+)
+user_pref("browser.urlbar.speculativeConnect.enabled", false);
 // Disable location bar autocomplete
 user_pref("browser.urlbar.autocomplete.enabled", false);
 // Disable location bar suggestion types
