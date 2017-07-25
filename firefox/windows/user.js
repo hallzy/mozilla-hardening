@@ -84,12 +84,14 @@ user_pref("toolkit.telemetry.enabled", false);
 user_pref("toolkit.telemetry.unifiedIsOptIn", true); // (hidden pref)
 user_pref("toolkit.telemetry.server", "");
 user_pref("toolkit.telemetry.archive.enabled", false);
+user_pref("toolkit.telemetry.cachedClientID", "");
+user_pref("toolkit.telemetry.newProfilePing.enabled", false); // (FF55+)
+user_pref("toolkit.telemetry.shutdownPingSender.enabled", false); // (FF55+)
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("datareporting.healthreport.documentServerURI", ""); // (hidden pref)
 user_pref("datareporting.healthreport.service.enabled", false); // (hidden pref)
 user_pref("datareporting.healthreport.about.reportUrl", "data:text/plain,");
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
-user_pref("toolkit.telemetry.cachedClientID", "");
 user_pref("browser.selfsupport.enabled", false); // (hidden pref)
 user_pref("browser.selfsupport.url", "");
 // Disable experiemts. Experiments allow Firefox to download and run restartless
