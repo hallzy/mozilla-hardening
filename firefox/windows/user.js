@@ -283,6 +283,10 @@ user_pref("browser.search.reset.whitelist", "");
 // only show english characters in urls. This will prevent me from being fooled
 // by some phishing sites.
 user_pref("network.IDN_show_punycode", true);
+// disable Form Autofill (FF54+)
+user_pref("browser.formautofill.enabled", false);
+// disable form @autocomplete (FF32+)
+user_pref("dom.forms.autocomplete.experimental", false);
 // Disable windows jumplists
 user_pref("browser.taskbar.lists.enabled", false);
 user_pref("browser.taskbar.lists.frequent.enabled", false);
@@ -933,6 +937,12 @@ user_pref("browser.tabs.insertRelatedAfterCurrent", true);
 user_pref("network.proxy.type", 0);
 // disable Screenshots (FF55+)
 user_pref("extensions.screenshots.disabled", true);
+// disable Form Autofill (also see 0864) (FF55+)
+// Stored data is NOT secure (uses a JSON file)
+// Heuristics controls Form Autofill on forms without @autocomplete attributes
+user_pref("extensions.formautofill.addresses.enabled", false);
+user_pref("extensions.formautofill.experimental", false);
+user_pref("extensions.formautofill.heuristics.enabled", false);
 // *****************************************************************************
 
 // *****************************************************************************
