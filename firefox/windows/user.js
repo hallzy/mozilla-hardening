@@ -936,7 +936,8 @@ user_pref("browser.tabs.insertRelatedAfterCurrent", true);
 // http://kb.mozillazine.org/Network.proxy.type
 user_pref("network.proxy.type", 0);
 // disable Screenshots (FF55+)
-user_pref("extensions.screenshots.disabled", true);
+user_pref("extensions.screenshots.disabled", true); // (FF55+)
+user_pref("extensions.screenshots.system-disabled", true); // (FF54+)
 // disable Form Autofill (also see 0864) (FF55+)
 // Stored data is NOT secure (uses a JSON file)
 // Heuristics controls Form Autofill on forms without @autocomplete attributes
