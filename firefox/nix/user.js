@@ -268,13 +268,9 @@ user_pref("browser.urlbar.suggest.history", false);
 user_pref("browser.urlbar.suggest.bookmark", false);
 user_pref("browser.urlbar.suggest.openpage", false);
 // disable search and form history
-// Leaving this commented so that forms still work. Just leaving it here so I
-// know it exists for future if I change my mind
-// user_pref("browser.formfill.enable", false);
+user_pref("browser.formfill.enable", false);
 // disable saving form data on secure websites - PRIVACY (shoulder surfers etc)
-// Leaving this commented so that forms still work. Just leaving it here so I
-// know it exists for future if I change my mind
-// user_pref("browser.formfill.saveHttpsForms", false);
+user_pref("browser.formfill.saveHttpsForms", false);
 // disable one-off searches from the addressbar (FF51+)
 user_pref("browser.urlbar.oneOffSearches", false);
 // disable search reset (about:searchreset) (FF51+)
