@@ -487,6 +487,7 @@ user_pref("media.block-autoplay-until-in-foreground", true);
 // could break sites if disabled possibly.
 // user_pref("media.eme.enabled", false);
 // user_pref("browser.eme.ui.enabled", false);
+// user_pref("media.eme.chromium-api.enabled", false); // (FF55+)
 // block websites detecting DRM is disabled
 // I am not disabling DRM, so no point in setting this
 // user_pref("media.eme.apiVisible", false);
