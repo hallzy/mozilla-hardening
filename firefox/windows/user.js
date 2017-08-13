@@ -499,6 +499,8 @@ user_pref("media.block-autoplay-until-in-foreground", true);
 // user_pref("media.gmp-gmpopenh264.enabled", false); // (hidden pref)
 // user_pref("media.gmp-gmpopenh264.autoupdate", false);
 // user_pref("media.gmp-manager.url", "data:text/plain,");
+// user_pref("media.gmp-manager.url.override", "data:text/plain,"); // (hidden pref)
+// user_pref("media.gmp-manager.updateEnabled", false); // disable local fallback (hidden pref)
 // disable the Adobe EME "Primetime CDM" (Content Decryption Module)
 // Won't disable again, since this could be needed for certain online media.
 // user_pref("media.gmp-eme-adobe.enabled", false);
