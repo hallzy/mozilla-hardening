@@ -451,7 +451,7 @@ user_pref("gfx.font_rendering.opentype_svg.enabled", false);
 user_pref("font.name.serif.x-unicode", "Georgia");
 user_pref("font.name.serif.x-western", "Georgia"); // default Times New Roman
 user_pref("font.name.sans-serif.x-unicode", "Arial");
-user_pref("font.name.sans-serif.x-western", "Arial");  // default Arial
+user_pref("font.name.sans-serif.x-western", "Arial"); // default Arial
 user_pref("font.name.monospace.x-unicode", "Lucida Console");
 user_pref("font.name.monospace.x-western", "Lucida Console"); // default Courier New
 // disable woff2
