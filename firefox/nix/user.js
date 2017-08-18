@@ -312,10 +312,17 @@ user_pref("security.ask_for_password", 2);
 // how often in minutes Mozilla should ask for the master password (see pref
 // above)
 user_pref("security.password_lifetime", 10);
-// disable auto-filling username & password form fields - SECURITY
+// disable auto-filling username & password form fields in HTTP - SECURITY
 // can leak in cross-site forms AND be spoofed
 // password will still be auto-filled after a user name is manually entered
 user_pref("signon.autofillForms", false);
+// Show warning for credential form on HTTP pages
+user_pref("security.insecure_field_warning.contextual.enabled", true);
+// prevent cross-origin images from triggering an HTTP-Authentication prompt
+// (FF55+)
+// ie. a cross origin image tag should not be allowed to trigger an
+// authentication prompt.
+user_pref("network.auth.subresource-img-cross-origin-http-auth-allow", false);
 // ignore websites' autocomplete="off" (FF30+)
 user_pref("signon.storeWhenAutocompleteOff", true);
 // force warnings for logins on non-secure (non HTTPS) pages
