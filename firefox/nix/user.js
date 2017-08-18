@@ -167,6 +167,15 @@ user_pref("privacy.trackingprotection.ui.enabled", true);
 user_pref("security.ssl.errorReporting.automatic", false);
 user_pref("security.ssl.errorReporting.enabled", false);
 user_pref("security.ssl.errorReporting.url", "");
+// disable TLS1.3 0-RTT (round-trip time) (FF51+)
+// 0-RTT is meant for visitors who have recently visited a site or are resuming
+// a previous connection. For these resumed connections, standard TLS 1.3 is
+// safer but no faster than any previous version of TLS.  0-RTT changes this.
+// The catch is that the encryption is weaker, so this setting disables 0-RTT
+// Everyone claims that the speedup is revolutionary, but 0-RTT only eliminates
+// one round trip of communication... big woop.
+// https://blog.cloudflare.com/introducing-0-rtt/
+user_pref("security.tls.enable_0rtt_data", false); // (FF55+ default true)
 // *****************************************************************************
 
 
