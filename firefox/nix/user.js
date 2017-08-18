@@ -122,7 +122,7 @@ user_pref("browser.newtabpage.directory.source", "data:text/plain,");
 user_pref("browser.newtabpage.enhanced", false);
 user_pref("browser.newtabpage.introShown", true);
 // Disable Activity Stream (system addon)
-user_pref.("browser.newtabpage.activity-stream.enabled", false);
+user_pref("browser.newtabpage.activity-stream.enabled", false);
 // disable "Snippets" (Mozilla content shown on about:home screen) MUST use
 // HTTPS - arbitrary content injected into this page via http opens up MiTM
 // attacks
@@ -733,12 +733,12 @@ user_pref("dom.webaudio.enabled", false);
 // from your computer
 user_pref("media.ondevicechange.enabled", false);
 // Disable presentation API
-user_pref("dom.presentation.enabled", false):
-user_pref("dom.presentation.controller.enabled", false):
-user_pref("dom.presentation.discoverable", false):
-user_pref("dom.presentation.discovery.enabled", false):
-user_pref("dom.presentation.receiver.enabled", false):
-user_pref("dom.presentation.session_transport.data_channel.enable", false):
+user_pref("dom.presentation.enabled", false);
+user_pref("dom.presentation.controller.enabled", false);
+user_pref("dom.presentation.discoverable", false);
+user_pref("dom.presentation.discovery.enabled", false);
+user_pref("dom.presentation.receiver.enabled", false);
+user_pref("dom.presentation.session_transport.data_channel.enable", false);
 // Disable site specific Zoom
 // Zoom levels affect screen res and are highly fingerprintable. This does not
 // stop you from using zoom, it will just not use/remember any site specific
