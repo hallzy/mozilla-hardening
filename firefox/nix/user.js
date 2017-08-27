@@ -959,6 +959,7 @@ user_pref("extensions.screenshots.system-disabled", true); // (FF54+)
 // Stored data is NOT secure (uses a JSON file)
 // Heuristics controls Form Autofill on forms without @autocomplete attributes
 user_pref("extensions.formautofill.addresses.enabled", false);
+user_pref("extensions.formautofill.creditCards.enabled", false); // (FF56+)
 user_pref("extensions.formautofill.experimental", false);
 user_pref("extensions.formautofill.heuristics.enabled", false);
 // *****************************************************************************
