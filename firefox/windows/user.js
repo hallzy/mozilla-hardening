@@ -659,6 +659,7 @@ user_pref("dom.allow_cut_copy", false); // (hidden pref)
 // DOES break a lot of sites' functionality. Applies to websites, add-ons and
 // session data. This breaks google drive, so I am setting it to true, but if
 // you do not care about google drive then you can set it to false
+// [WARNING] Setting this to false BREAKS uBlock Origin 1.14.0+ [2017-08-30]
 user_pref("dom.indexedDB.enabled", true);
 // https://wiki.mozilla.org/WebAPI/Security/WebTelephony
 // allows phone calls. Issues arise with the possiblity of calls to high cost
