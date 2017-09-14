@@ -70,6 +70,7 @@ user_pref("browser.search.geoip.url", "");
 user_pref("geo.wifi.xhr.timeout", 1);
 user_pref("browser.search.geoip.timeout", 1);
 // Disable geolocation on non-secure origins.
+// POSSIBLY DEPRECATED
 user_pref("geo.security.allowinsecure", false);
 // *****************************************************************************
 
@@ -87,12 +88,15 @@ user_pref("toolkit.telemetry.archive.enabled", false);
 user_pref("toolkit.telemetry.cachedClientID", "");
 user_pref("toolkit.telemetry.newProfilePing.enabled", false); // (FF55+)
 user_pref("toolkit.telemetry.shutdownPingSender.enabled", false); // (FF55+)
+user_pref("toolkit.telemetry.updatePing.enabled", false); // (FF56+)
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("datareporting.healthreport.documentServerURI", ""); // (hidden pref)
 user_pref("datareporting.healthreport.service.enabled", false); // (hidden pref)
 user_pref("datareporting.healthreport.about.reportUrl", "data:text/plain,");
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
+// POSSIBLY DEPRECATED
 user_pref("browser.selfsupport.enabled", false); // (hidden pref)
+// POSSIBLY DEPRECATED
 user_pref("browser.selfsupport.url", "");
 // Disable experiemts. Experiments allow Firefox to download and run restartless
 // addons
@@ -117,6 +121,7 @@ user_pref("extensions.webcompat-reporter.enabled", false);
 // tab screen
 user_pref("browser.newtabpage.enabled", false);
 user_pref("browser.newtab.preload", false);
+// POSSIBLY DEPRECATED
 user_pref("browser.newtabpage.directory.ping", "data:text/plain,");
 user_pref("browser.newtabpage.directory.source", "data:text/plain,");
 user_pref("browser.newtabpage.enhanced", false);
@@ -288,7 +293,7 @@ user_pref("browser.search.reset.whitelist", "");
 // only show english characters in urls. This will prevent me from being fooled
 // by some phishing sites.
 user_pref("network.IDN_show_punycode", true);
-// disable Form Autofill (FF54+)
+// POSSIBLY DEPRECATED: disable Form Autofill (FF54+)
 user_pref("browser.formautofill.enabled", false);
 // disable form @autocomplete (FF32+)
 user_pref("dom.forms.autocomplete.experimental", false);
@@ -670,6 +675,7 @@ user_pref("dom.telephony.enabled", false);
 // Disables timer - can be used to check how long an image (for example) takes
 // to load. If it is quick, it was probably cached, and tells the website I have
 // probably visited a site with that image recently.
+// POSSIBLY DEPRECATED
 user_pref("dom.enable_user_timing", false);
 user_pref("dom.enable_resource_timing", false);
 user_pref("dom.enable_performance", false);
@@ -734,6 +740,7 @@ user_pref("media.video_stats.enabled", false);
 // forms on web pages. These parameters vary between types of keyboard layouts
 // and between various languages, eg German vs English.
 // WARNING: Don't use if Android + physical keyboard
+// POSSIBLY DEPRECATED
 user_pref("dom.keyboardevent.code.enabled", false);
 user_pref("dom.beforeAfterKeyboardEvent.enabled", false);
 user_pref("dom.keyboardevent.dispatch_during_composition", false);
@@ -871,6 +878,31 @@ user_pref("security.block_script_with_wrong_mime", true);
 // *** FIRST PARTY ISOLATION ***
 // *****************************************************************************
 user_pref("ghacks_user.js.parrot", "FIRST PARTY ISOLATION BEGIN");
+// enable First Party Isolation (FF51+)
+// [WARNING] May break cross-domain logins and site functionality until
+// perfected
+// NOTE: This may also break self-destructing-cookies addon, so I am not
+// settings this.
+// user_pref("privacy.firstparty.isolate", true);
+// enforce FPI restriction for window.opener (FF54+)
+// I don't think this has any affect unless the previous setting is also set.
+// Leave this here anyways in case I enable the previous setting later.
+user_pref("privacy.firstparty.isolate.restrict_opener_access", true);
+// enable privacy.resistFingerprinting (FF41+)
+// (hidden pref) (not hidden FF55+)
+user_pref("privacy.resistFingerprinting", true);
+// set new window sizes to round to hundreds (FF55+) [SETUP]
+// [NOTE] Width will round to multiples of 200s and height to 100s, to fit your
+// screen. The override values are a starting point to round from if you want
+// some control
+// Override dimensions. Used to help prevent fingerprinting based on screen size
+user_pref("privacy.window.maxInnerWidth", 1600); // (hidden pref)
+user_pref("privacy.window.maxInnerHeight", 900); // (hidden pref)
+// spoof (or limit?) number of CPU cores (FF48+)
+// [WARNING] *may* affect core chrome/Firefox performance, will affect content.
+// Supposed to protect against fingerprinting... I don't think it matters that
+// much so I am commenting for now.
+// user_pref("dom.maxHardwareConcurrency", 2);
 // *****************************************************************************
 
 
@@ -902,7 +934,6 @@ user_pref("browser.storageManager.enabled", false);
 // Disable HTTP sites from setting cookies with the "secure" directive
 user_pref("network.cookie.leave-secure-alone", true);
 // *****************************************************************************
-
 
 // *****************************************************************************
 // *** SHUTDOWN ***
@@ -942,9 +973,10 @@ user_pref("view_source.tab", false);
 user_pref("layout.spellcheckDefault", 1);
 // disable animations
 user_pref("toolkit.cosmeticAnimations.enabled", false);
+// POSSIBLY DEPRECATED
 // disable tab animation, speed things up a little
 user_pref("browser.tabs.animate", false);
-// disable fullscreeen animation. Test using F11.
+// POSSIBLY DEPRECATED: disable fullscreeen animation. Test using F11.
 user_pref("browser.fullscreen.animate", false);
 // open links in a new tab immediately to the right of parent tab, not far right
 user_pref("browser.tabs.insertRelatedAfterCurrent", true);
