@@ -293,6 +293,9 @@ user_pref("browser.search.reset.whitelist", "");
 // only show english characters in urls. This will prevent me from being fooled
 // by some phishing sites.
 user_pref("network.IDN_show_punycode", true);
+// block top level window data: URIs (FF56+)
+// https://www.wordfence.com/blog/2017/01/gmail-phishing-data-uri/
+user_pref("security.data_uri.block_toplevel_data_uri_navigations", true);
 // POSSIBLY DEPRECATED: disable Form Autofill (FF54+)
 user_pref("browser.formautofill.enabled", false);
 // disable form @autocomplete (FF32+)
