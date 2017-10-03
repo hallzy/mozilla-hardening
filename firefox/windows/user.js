@@ -378,6 +378,11 @@ user_pref("browser.cache.frecency_experiment", -1);
 user_pref("ghacks_user.js.parrot", "SSL / OSCP / CERTS etc  BEGIN");
 // enable OCSP stapling. This may break some websites that otherwise would just
 // be a warning
+// OCSP is when you receive a certificate from a website that is still valid,
+// but you go ahead and ask the CA if it really is still valid (just in case
+// something changed). The stapling, means that instead of you Requesting OCSP
+// from the CA, the website gives you back an OCSP response with a timestamp
+// that was signed by the CA, so you do not need to ask the CA directly.
 user_pref("security.ssl.enable_ocsp_stapling", true);
 // reject communication with servers using old SSL/TLS - vulnerable to a MiTM
 // attack
@@ -391,6 +396,9 @@ user_pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
 // 0=disable, 1=validate only certificates that specify an OCSP service URL
 // 2=enable and use values in security.OCSP.URL and security.OCSP.signing
 user_pref("security.OCSP.enabled", 1);
+// Requires the use of OCSP. If OCSP can not be used, the connection to the
+// website fails.
+user_pref("security.OCSP.require", true);
 // enforce strict pinning
 // PKP (public key pinning) 0-disabled 1=allow user MiTM (such as your
 // antivirus), 2=strict
