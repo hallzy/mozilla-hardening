@@ -384,6 +384,20 @@ user_pref("ghacks_user.js.parrot", "SSL / OSCP / CERTS etc  BEGIN");
 // from the CA, the website gives you back an OCSP response with a timestamp
 // that was signed by the CA, so you do not need to ask the CA directly.
 user_pref("security.ssl.enable_ocsp_stapling", true);
+// query OCSP responder servers to confirm current validity of certificates
+// 0=disable, 1=validate only certificates that specify an OCSP service URL
+// 2=enable and use values in security.OCSP.URL and security.OCSP.signing
+user_pref("security.OCSP.enabled", 1);
+// Requires the use of OCSP. If OCSP can not be used, the connection to the
+// website fails.
+user_pref("security.OCSP.require", true);
+// If OSCP is not stapled then the connection will fail.
+user_pref("security.ssl.enable_ocsp_must_staple", true);
+// Information on this is sparse, but I believe it relates to using OCSP for GET
+// requests. There is very little information on the internet about this setting
+// though, so I am unsure exactly what it does, and how much it will break
+// things. Default was 'false'
+user_pref("security.OCSP.GET.enabled", true);
 // reject communication with servers using old SSL/TLS - vulnerable to a MiTM
 // attack
 // https://wiki.mozilla.org/Security:Renegotiation
@@ -392,13 +406,6 @@ user_pref("security.ssl.require_safe_negotiation", true);
 // display warning (red padlock) for "broken security"
 // https://wiki.mozilla.org/Security:Renegotiation
 user_pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
-// query OCSP responder servers to confirm current validity of certificates
-// 0=disable, 1=validate only certificates that specify an OCSP service URL
-// 2=enable and use values in security.OCSP.URL and security.OCSP.signing
-user_pref("security.OCSP.enabled", 1);
-// Requires the use of OCSP. If OCSP can not be used, the connection to the
-// website fails.
-user_pref("security.OCSP.require", true);
 // enforce strict pinning
 // PKP (public key pinning) 0-disabled 1=allow user MiTM (such as your
 // antivirus), 2=strict
