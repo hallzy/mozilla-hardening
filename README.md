@@ -127,6 +127,11 @@ information about your connection.
 
 Blocks certain content, ads, and analytics.
 
+### NoCoin
+
+[NoCoin](https://github.com/keraf/NoCoin) Blocks in browser bitcoin miners from
+running
+
 ## Special Usage for Removing `Pocket`
 
 Before applying the Firefox user.js file, make sure to remove pocket from the
