@@ -500,6 +500,15 @@ user_pref("network.http.referer.XOriginPolicy", 1);
 user_pref("network.http.referer.spoofSource", false);
 // Hide (not spoof) referer when leaving a .onion domain
 user_pref("network.http.referer.hideOnionSource", true);
+// disable the DNT HTTP header, which is essentially USELESS
+// It is voluntary and most ad networks do not honour it.
+// DNT is *NOT* how you stop being data mined.
+// Don't encourage a setting that gives any legitimacy to 3rd parties being in
+// control of your privacy.
+// Sending a DNT header *highly likely* raises entropy, especially in standard
+// windows.
+user_pref("privacy.donottrackheader.enabled", false);
+user_pref("noscript.doNotTrack.enabled", false);
 // *****************************************************************************
 
 
