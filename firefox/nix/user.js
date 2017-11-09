@@ -89,6 +89,8 @@ user_pref("toolkit.telemetry.cachedClientID", "");
 user_pref("toolkit.telemetry.newProfilePing.enabled", false); // (FF55+)
 user_pref("toolkit.telemetry.shutdownPingSender.enabled", false); // (FF55+)
 user_pref("toolkit.telemetry.updatePing.enabled", false); // (FF56+)
+user_pref("toolkit.telemetry.bhrPing.enabled", false); // (FF57+) Background Hang Reporter
+user_pref("toolkit.telemetry.firstShutdownPing.enabled", false); // (FF57+)
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("datareporting.healthreport.documentServerURI", ""); // (hidden pref)
 user_pref("datareporting.healthreport.service.enabled", false); // (hidden pref)
@@ -128,6 +130,7 @@ user_pref("browser.newtabpage.enhanced", false);
 user_pref("browser.newtabpage.introShown", true);
 // Disable Activity Stream (system addon)
 user_pref("browser.newtabpage.activity-stream.enabled", false);
+user_pref("browser.library.activity-stream.enabled", false); // (FF57+)
 // disable "Snippets" (Mozilla content shown on about:home screen) MUST use
 // HTTPS - arbitrary content injected into this page via http opens up MiTM
 // attacks
