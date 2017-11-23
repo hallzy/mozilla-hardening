@@ -108,6 +108,11 @@ user_pref("experiments.supported", false);
 user_pref("experiments.activeExperiment", false);
 // Disable silent opt-in of experiemnts
 user_pref("network.allow-experiments", false);
+// disable PingCentre telemetry (used in several system extensions) (FF57+)
+user_pref("browser.ping-centre.telemetry", false);
+// disable location bar suggesting local search history (FF57+)
+// https://bugzilla.mozilla.org/show_bug.cgi?id=1181644
+user_pref("browser.urlbar.maxHistoricalSearchSuggestions", 0); // max. number of search suggestions
 // Disable Crash-Reports
 user_pref("breakpad.reportURL", "");
 // disable Onboarding (FF55+)
@@ -877,6 +882,8 @@ user_pref("browser.uitour.enabled", false);
 user_pref("browser.uitour.url", "");
 // disable remote JAR files being opened, regardless of content type
 user_pref("network.jar.block-remote-files", true);
+// prevent accessibility services from accessing your browser
+user_pref("accessibility.force_disabled", 1);
 // enforce separate content process for file://URLs (FF53+?)
 // secures local files better
 user_pref("browser.tabs.remote.separateFileUriProcess", true);
@@ -1026,6 +1033,9 @@ user_pref("extensions.formautofill.available", "off"); // (FF56+)
 user_pref("extensions.formautofill.creditCards.enabled", false); // (FF56+)
 user_pref("extensions.formautofill.experimental", false);
 user_pref("extensions.formautofill.heuristics.enabled", false);
+// hide recently bookmarked items (you still have the original bookmarks) (FF49+)
+// https://bugzilla.mozilla.org/show_bug.cgi?id=1401238
+user_pref("browser.bookmarks.showRecentlyBookmarked", false);
 // *****************************************************************************
 
 // *****************************************************************************
