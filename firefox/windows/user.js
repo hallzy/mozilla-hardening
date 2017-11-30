@@ -54,6 +54,12 @@
 user_pref("ghacks_user.js.parrot", "STARTING");
 
 // *****************************************************************************
+// *** START ***
+// *****************************************************************************
+user_pref("browser.startup.homepage", "check.torproject.org");
+// *****************************************************************************
+
+// *****************************************************************************
 // *** GEOLOCATION ***
 // *****************************************************************************
 user_pref("ghacks_user.js.parrot", "GEOLOCATION BEGIN");
@@ -968,6 +974,10 @@ user_pref("network.cookie.thirdparty.sessionOnly", true);
 // of site data in order to make room for other things.
 user_pref("dom.storageManager.enabled", false);
 user_pref("browser.storageManager.enabled", false);
+// Clear localStorage and UUID when a webextension is uninstalled. Both of these
+// preferences have to be the same
+user_pref("extensions.webextensions.keepStorageOnUninstall", false);
+user_pref("extensions.webextensions.keepUuidOnUninstall", false);
 // Disable HTTP sites from setting cookies with the "secure" directive
 user_pref("network.cookie.leave-secure-alone", true);
 // *****************************************************************************
