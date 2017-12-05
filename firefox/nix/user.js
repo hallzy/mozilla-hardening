@@ -522,7 +522,6 @@ user_pref("network.http.referer.hideOnionSource", true);
 // Sending a DNT header *highly likely* raises entropy, especially in standard
 // windows.
 user_pref("privacy.donottrackheader.enabled", false);
-user_pref("noscript.doNotTrack.enabled", false);
 // *****************************************************************************
 
 
@@ -1047,6 +1046,293 @@ user_pref("extensions.formautofill.heuristics.enabled", false);
 // https://bugzilla.mozilla.org/show_bug.cgi?id=1401238
 user_pref("browser.bookmarks.showRecentlyBookmarked", false);
 // *****************************************************************************
+
+// *****************************************************************************
+// *** NOSCRIPT ***
+// *****************************************************************************
+user_pref("ghacks_user.js.parrot", "NOSCRIPT BEGIN");
+// Set the do not track to off
+user_pref("noscript.doNotTrack.enabled", false);
+// same as noscript.autoReload.allTabs but determines what happens when you
+// globally allow scripts, which I should never do but if I do I only want the
+// current tab to be reloaded
+user_pref("noscript.autoReload.allTabsOnGlobal", false);
+// same as other reloads, but as far as I can tell, disables autoReload when
+// scripts are allowed globally regardless. It is my understanding that this
+// supersedes the allTabsOnGlobal setting but I do not know this for sure.
+user_pref("noscript.autoReload.global", false);
+// Controls if all tabs are reloaded when you do a bulk permission change such
+// as allowing all on the current page. False means that only the current tab is
+// reloaded when this occurs.
+user_pref("noscript.autoReload.allTabsOnPageAction", false);
+// Setting to true keeps the CTRL+SHIFT+\ key combo to temporarily allow the
+// current top-level domain. False makes it permanent
+user_pref("noscript.toggle.temp", true);
+// More recent versions of NoScript check for rules affecting the origin and the
+// parent of the origin when allowing or blocking plugins. This behaviour is
+// meant to provide effective protection against Flash-Based XSS and is
+// recommended to keep as true (default).
+user_pref("noscript.forbidActiveContentParentTrustCheck", true);
+// Anti-XSS protection automatically filters the requests from untrusted origins
+// to trusted destinations, where a trusted site is either allowed, or
+// temporarily allowed. If you prefer temporarily allowed sites to be considered
+// untrusted from the XSS point of view set the below setting to false, true
+// considers them both as trusted.
+user_pref("noscript.xss.trustTemp", true);
+// the injectionChecker engine checks checks all the requests that start from
+// whitelisted origins for suspicious patterns landing on different trusted
+// sites. If a potential XSS attack is detected (even if coming from a trusted
+// source) anti-XSS filters are triggered according to this preference. See the
+// below options:
+// 0 = Never Check
+// 1 = Check cross-site requests from temporarily allowed sites
+// 2 = Check every cross-site request (DEFAULT)
+// 3 = Check EVERY request
+user_pref("noscript.injectionCheck", 2);
+// Keep the sticky UI (default) which lets you select multiple sources at once
+// without reloading or closing the noscript dialog
+user_pref("noscript.stickyUI", true);
+// Should stickyUI also work for ctrl+shift+s... true (default) is yes.
+user_pref("noscript.stickyUI.onKeyboard", true);
+// Do live reloads with stickyUI. I don't want this so I am leaving as false
+// (default)
+user_pref("noscript.stickyUI.liveReload", false);
+
+// *****************************************************************************
+// **** GENERAL TAB OF SETTINGS ****
+// Temporarily allow top-level sites by default
+// 0 = Disabled (unchecked)
+// 1 = Enabled for Full addresses eg: http://www.noscript.net (checked)
+// 2 = Enabled for Full domains eg: www.noscript.net (checked)
+// 3 = Enabled for base 2nd level domains eg: noscript.net (checked)
+user_pref("noscript.autoAllow", 0);
+// Open permissions menu when mouse hovers over NoScript's Icon
+// True (checked) = hovering over the NoScript Toolbar icon opens the dialog.
+// False (checked) =  means you actually have to click it to do something
+user_pref("noscript.hoverUI", false);
+// if hoverUI is false "left clicking on noscript toolbar button toggles
+// permissions for current top-level site"
+// 0 = Disabled - Click the logo to open the dialog (unchecked)
+// 1 = Enabled - Full Addresses (checked)
+// 2 = Enabled - Full Domains (checked)
+// 3 = Enabled - Base 2nd Level Domains (checked)
+user_pref("noscript.toolbarToggle", 0);
+// Automatically reload affected pages when permissions change
+user_pref("noscript.autoReload", true);
+// Reload the current tab only
+// Setting to false only reloads the current page instead of all tabs
+user_pref("noscript.autoReload.allTabs", false);
+// Allow sites opened through bookmarks
+user_pref("noscript.allowBookmarks", false);
+// *****************************************************************************
+
+// *****************************************************************************
+// **** WHITELIST TAB OF SETTINGS ****
+// Whitelist is in "capability.policy.maonoscript.sites"
+// Blacklist is in "noscript.untrusted"
+
+// Scripts Globally Allowed (dangerous)
+// False does not allow scripts globally
+user_pref("noscript.global", false);
+// *****************************************************************************
+
+// *****************************************************************************
+// **** EMBEDDINGS TAB OF SETTINGS ****
+// Controls the "Apply these restrictions to whitelisted sites too" checkbox.
+// Setting to true checks the box
+user_pref("noscript.contentBlocker", false);
+// These apply only to untrusted sites unless noscript.contentBlocker is set to
+// true.
+// They forbid certain things from running
+user_pref("noscript.forbidJava", true);
+user_pref("noscript.forbidFlash", true);
+user_pref("noscript.forbidSilverlight", true);
+user_pref("noscript.forbidPlugins", true);
+user_pref("noscript.forbidMedia", true);
+user_pref("noscript.forbidIFrames", true);
+user_pref("noscript.forbidFrames", true);
+user_pref("noscript.forbidFonts", true);
+// Block every object coming from a site marked as untrusted
+user_pref("noscript.alwaysBlockUntrustedContent", true);
+// Forbid WebGL
+user_pref("noscript.forbidWebGL", true);
+// Show placeholder icon
+user_pref("noscript.showPlaceholder", true);
+// No placeholder for objects coming from sites marked as untrusted
+user_pref("noscript.showUntrustedPlaceholder", false);
+// Ask for confirmation before temporarily unblocking an object
+user_pref("noscript.confirmUnblock", true);
+// Collapse blocked objects
+user_pref("noscript.collapseObject", true);
+// *****************************************************************************
+
+// *****************************************************************************
+// **** APPEARANCE TAB OF SETTINGS ****
+// show Status bar label
+user_pref("noscript.statusLabel", false);
+// show Contextual Menu
+user_pref("noscript.ctxMenu", true);
+// show Allow [...]
+user_pref("noscript.showPermanent", true);
+// show Mark [...] as untrusted
+user_pref("noscript.showDistrust", true);
+// show Base 2nd level Domains (noscript.net)
+user_pref("noscript.showBaseDomain", true);
+// show Full Domains (www.noscript.net)
+user_pref("noscript.showDomain", false);
+// show full Addresses (http://www.noscript.net)
+user_pref("noscript.showAddress", false);
+// show Allow Scripts Globally -- Please note that this is the appearance section...
+// this setting does not turn on global scripts, it only shows the option in the
+// drop down dialog.
+user_pref("noscript.showGlobal", false);
+// show About NoScript x.x.x
+user_pref("noscript.showAbout", true);
+// Show untrusted domains
+user_pref("noscript.showUntrusted", true);
+// Show blocked objects
+user_pref("noscript.showBlockedObjects", true);
+// Show recently blocked sites
+user_pref("noscript.showRecentlyBlocked", true);
+// Show allow all this page
+user_pref("noscript.showAllowPage", false);
+// Show temporarily allow all this page.
+user_pref("noscript.showTempAllowPage", true);
+// Show make page permissions permanent
+user_pref("noscript.showTempToPerm", true);
+// Show revoke temporary permissions
+user_pref("noscript.showRevokeTemp", true);
+// Show permanent "allow" commands in private windows
+user_pref("noscript.showVolatilePrivatePermissionsToggle", true);
+// *****************************************************************************
+
+// *****************************************************************************
+// **** NOTIFICATIONS TAB OF SETTINGS ****
+// Show message about blocked scripts
+user_pref("noscript.notify", true);
+// Place message at the bottom
+// if false it goes to the top. This setting only has an affect if
+// noscript.notify is true
+user_pref("noscript.notify.bottom", false);
+// Hide after x seconds
+// This setting turns the hiding on
+user_pref("noscript.notify.hide", true);
+// This setting defines how long after showing the notification that it will be
+// hidden. Default is 5, but it doesn't do anything unless noscript.notify.hide
+// is true
+user_pref("noscript.notify.hideDelay", 5);
+// XSS Notifications
+user_pref("noscript.xss.notify", true);
+// Show message about blocked META Redirections. Not 100% sure what this means
+// but true is the default and seems like a good idea to notify about something.
+user_pref("noscript.forbidMetaRefresh.notify", true);
+// Show notifications about ABE
+user_pref("noscript.ABE.notify", true);
+// Show notifications about ClearClick Warnings (ClearClick is NoScripts
+// anti-clickjacking)
+user_pref("noscript.clearClick.prompt", true);
+// Give audio feedback when scripts are blocked
+user_pref("noscript.sound", false);
+// This defines what audio file to use when a script is blocked. Only has an
+// affect if noscript.sound is true. I commented because I don't use it, nor do
+// I care what file it uses, however if the default changes in the future I
+// would rather noscript change that on its own.
+// user_pref("noscript.sound.block", "chrome://noscript/skin/block.wav");
+// Display the release notes on updates
+user_pref("noscript.firstRunRedirection", true);
+// *****************************************************************************
+
+// *****************************************************************************
+// **** ADVANCED TAB OF SETTINGS ****
+// Forbid Bookmarkets (I don't because I sometimes find them useful. If I ever
+// decide not to use them I will change this)
+// ONLY APPLIES FOR UNTRUSTED SOURCES
+user_pref("noscript.forbidBookmarklets", false);
+// Forbid <a ping...>
+// a ping attribute in an <a> tag provides a list of URLs that will be notified
+// if you choose to follow the hyperlink specified in the <a> tag. This disables
+// that ability.
+// ONLY APPLIES FOR UNTRUSTED SOURCES
+user_pref("noscript.noping", true);
+// hide <noscript> elements
+// <noscript> elements are page elements that only display if scripts are
+// blocked. This setting blocks those as well.
+// ONLY APPLIES FOR UNTRUSTED SOURCES
+user_pref("noscript.nselNever", true);
+// Forbid META redirections inside <noscript> elements
+// ONLY APPLIES FOR UNTRUSTED SOURCES
+user_pref("noscript.forbidMetaRefresh", true);
+// Forbid XSLT - XSLT = Extensible Stylesheet Language Transformations, which is
+// a language for transforming XML documents into other XML documents or other
+// formats such as HTML, plain text etc.
+// No idea why I would need to block it but it was blocked by default, so may as
+// well leave it.
+// ONLY APPLIES FOR UNTRUSTED SOURCES
+user_pref("noscript.forbidXSLT", true);
+// Block scripting in whitelisted subdocuments of non-whitelisted pages.
+// ONLY APPLIES FOR UNTRUSTED SOURCES
+user_pref("noscript.restrictSubdocScripting", true);
+// Show the <noscript> element which follows a blocked <script>
+// In effect, if a noscript element follows a script that was blocked in the
+// html code, then show the noscript element.
+// ONLY APPLIES FOR **TRUSTED** SOURCES
+user_pref("noscript.nselForce", true);
+// allow <a ping..>. This is NOT a noscript setting but a browser setting. The
+// preference is below, but it is commented because it is set earlier in this
+// user.js file
+// ONLY APPLIES FOR **TRUSTED** SOURCES
+// user_pref("browser.send_pings", false);
+// Allow local links
+// ONLY APPLIES FOR **TRUSTED** SOURCES
+user_pref("capability.policy.maonoscript.checkloaduri.enabled", "");
+// Cascade top document's permissions to 3rd party scripts
+// ONLY APPLIES FOR **TRUSTED** SOURCES
+user_pref("noscript.cascadePermissions", false);
+// XSS - Sanitize cross-site suspicious requests
+user_pref("noscript.filterXGet", true);
+// XSS - Turn cross-site POST requests into data-less GET requests
+user_pref("noscript.filterXPost", true);
+// Enable automatic secure cookies management
+user_pref("noscript.secureCookies", false);
+// Forbid active web content unless it comes from a secure (HTTPS) connection:
+// 0 = Never
+// 1 = When using a proxy (recommended for use with TOR)
+// 2 = Always
+user_pref("noscript.allowHttpsOnly", 0);
+// Allow HTTPS scripts globally on HTTPS documents
+user_pref("noscript.globalHttpsWhitelist", false);
+// Enable ABE (Application Boundaries Enforcer)
+user_pref("noscript.ABE.enabled", true);
+// Allow sites to push their own rulesets
+user_pref("noscript.ABE.siteEnabled", false);
+// WAN IP (xxx.xxx.xxx.xxx) is in LOCAL
+user_pref("noscript.ABE.wanIpAsLocal", true);
+// Enables and sets up ClearClick for trusted and/or untrusted sites.
+// It is a bitfield where untrused = 1 and trusted = 2
+// eg: 0 = Disabled
+// eg: 1 = untrusted only
+// eg: 2 = trusted only
+// eg: 3 = untrusted and trusted
+user_pref("noscript.clearClick", 3);
+// -----------------------------------------------------------------------------
+// For completeness, the following key is for XSS exceptions:
+// ---- noscript.filterXExceptions
+// This pref is a list of domains that are forced to use HTTPS
+// ---- noscript.httpsForced
+// This pref is a list of dmomains where we NEVER force Https connections
+// ---- noscript.httpsForcedExceptions
+// This pref forces encryption for all the cookies set over HTTPS for the sites
+// specified in the pref string
+// ---- noscript.secureCookiesExceptions
+// This pref ingores unsafe cookies set over HTTPS from the sites set in this
+// pref string
+// ---- noscript.secureCookiesForced
+// System rulesets for ABE
+// ---- noscript.ABE.rulesets.SYSTEM
+// User rulesets for ABE
+// ---- noscript.ABE.rulesets.USER
+// *****************************************************************************
+
 
 // *****************************************************************************
 // *** POSSIBLY DEPRECATED ***
