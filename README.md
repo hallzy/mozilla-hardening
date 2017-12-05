@@ -49,9 +49,9 @@ NoScript settings, which are a good place to start. It comes with some common
 sites that are okay to whitelist, and also some blacklisted sites that are known
 trackers.
 
-### uBlock
+### uBlock and uMatrix
 
-Ad-Blocker.
+Content Blockers
 
 See below in the `thanks` section to find `CHEF-KOCH`s
 uBlock settings, which are a good place to start.
