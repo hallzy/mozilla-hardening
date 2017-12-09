@@ -473,6 +473,8 @@ user_pref("security.mixed_content.block_active_content", true);
 // 0=do neither, 1=pre populate url 2=pre-populate url and pre fetch cert (def)
 user_pref("browser.ssl_override_behavior", 1);
 user_pref("browser.xul.error_pages.expert_bad_cert", true);
+// display HTTP sites as insecure (FF59+)
+user_pref("security.insecure_connection_icon.enabled", true); // all windows
 // *****************************************************************************
 
 
