@@ -139,6 +139,12 @@ user_pref("browser.newtabpage.directory.ping", "data:text/plain,");
 user_pref("browser.newtabpage.directory.source", "data:text/plain,");
 user_pref("browser.newtabpage.enhanced", false);
 user_pref("browser.newtabpage.introShown", true);
+// Put the tabs on above address bar
+// They are below the address bar by default in browsers like Pale Moon
+user_pref("browser.tabs.onTop", true);
+// Don't show the graphical preview when using ctrl+tab to cycle through tabs
+// The preview is shown by default in browsers like Pale Moon
+user_pref("browser.ctrlTab.previews", false);
 // Disable Activity Stream (system addon)
 user_pref("browser.newtabpage.activity-stream.enabled", false);
 user_pref("browser.library.activity-stream.enabled", false); // (FF57+)
