@@ -475,6 +475,8 @@ user_pref("security.ssl3.ecdhe_ecdsa_aes_128_sha", false);
 user_pref("security.ssl3.ecdhe_rsa_aes_128_sha", false);
 // disable insecure active content on https pages - mixed content
 user_pref("security.mixed_content.block_active_content", true);
+// disable insecure passive content (such as images) on https pages
+user_pref("security.mixed_content.block_display_content", true);
 // Control "Add Security Exception" dialog on SSL warnings
 // 0=do neither, 1=pre populate url 2=pre-populate url and pre fetch cert (def)
 user_pref("browser.ssl_override_behavior", 1);
