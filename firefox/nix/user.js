@@ -1230,8 +1230,8 @@ user_pref("noscript.notify", true);
 // noscript.notify is true
 user_pref("noscript.notify.bottom", false);
 // Hide after x seconds
-// This setting turns the hiding on
-user_pref("noscript.notify.hide", true);
+// This setting turns the hiding off
+user_pref("noscript.notify.hide", false);
 // This setting defines how long after showing the notification that it will be
 // hidden. Default is 5, but it doesn't do anything unless noscript.notify.hide
 // is true
