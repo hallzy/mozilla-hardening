@@ -977,12 +977,15 @@ user_pref("ghacks_user.js.parrot", "COOKIES AND DOM STORAGE BEGIN");
 user_pref("network.cookie.cookieBehavior", 1);
 // ensure that third-party cookies (if enabled, see above pref) are session-only
 user_pref("network.cookie.thirdparty.sessionOnly", true);
+user_pref("network.cookie.thirdparty.nonsecureSessionOnly", true); // (FF58+)
 // disable Storage API (FF51+) which gives sites' code the ability to find out
 // how much space they can use, how much they are already using, and even
 // control whether or not they need to be alerted before the user agent disposes
 // of site data in order to make room for other things.
 user_pref("dom.storageManager.enabled", false);
 user_pref("browser.storageManager.enabled", false);
+// disable HTTP sites setting cookies with the "secure" directive (default: true) (FF52+)
+user_pref("network.cookie.leave-secure-alone", true);
 // Clear localStorage and UUID when a webextension is uninstalled. Both of these
 // preferences have to be the same
 user_pref("extensions.webextensions.keepStorageOnUninstall", false);
