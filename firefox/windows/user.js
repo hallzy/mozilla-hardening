@@ -475,6 +475,8 @@ user_pref("security.ssl3.ecdhe_ecdsa_aes_128_sha", false);
 user_pref("security.ssl3.ecdhe_rsa_aes_128_sha", false);
 // disable insecure active content on https pages - mixed content
 user_pref("security.mixed_content.block_active_content", true);
+// disable insecure passive content (such as images) on https pages
+user_pref("security.mixed_content.block_display_content", true);
 // Control "Add Security Exception" dialog on SSL warnings
 // 0=do neither, 1=pre populate url 2=pre-populate url and pre fetch cert (def)
 user_pref("browser.ssl_override_behavior", 1);
@@ -975,12 +977,15 @@ user_pref("ghacks_user.js.parrot", "COOKIES AND DOM STORAGE BEGIN");
 user_pref("network.cookie.cookieBehavior", 1);
 // ensure that third-party cookies (if enabled, see above pref) are session-only
 user_pref("network.cookie.thirdparty.sessionOnly", true);
+user_pref("network.cookie.thirdparty.nonsecureSessionOnly", true); // (FF58+)
 // disable Storage API (FF51+) which gives sites' code the ability to find out
 // how much space they can use, how much they are already using, and even
 // control whether or not they need to be alerted before the user agent disposes
 // of site data in order to make room for other things.
 user_pref("dom.storageManager.enabled", false);
 user_pref("browser.storageManager.enabled", false);
+// disable HTTP sites setting cookies with the "secure" directive (default: true) (FF52+)
+user_pref("network.cookie.leave-secure-alone", true);
 // Clear localStorage and UUID when a webextension is uninstalled. Both of these
 // preferences have to be the same
 user_pref("extensions.webextensions.keepStorageOnUninstall", false);
@@ -1034,6 +1039,8 @@ user_pref("browser.tabs.animate", false);
 user_pref("browser.fullscreen.animate", false);
 // open links in a new tab immediately to the right of parent tab, not far right
 user_pref("browser.tabs.insertRelatedAfterCurrent", true);
+// Don't preload tabs when I hover over them
+user_pref("browser.tabs.remote.warmup.enabled", false);
 // Disable proxy in firefox by default
 // Useful on Windows if you are wanting to disable IE by changing the Windows
 // proxy settings.
@@ -1223,8 +1230,8 @@ user_pref("noscript.notify", true);
 // noscript.notify is true
 user_pref("noscript.notify.bottom", false);
 // Hide after x seconds
-// This setting turns the hiding on
-user_pref("noscript.notify.hide", true);
+// This setting turns the hiding off
+user_pref("noscript.notify.hide", false);
 // This setting defines how long after showing the notification that it will be
 // hidden. Default is 5, but it doesn't do anything unless noscript.notify.hide
 // is true
