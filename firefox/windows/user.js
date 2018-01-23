@@ -121,6 +121,11 @@ user_pref("browser.ping-centre.telemetry", false);
 user_pref("browser.urlbar.maxHistoricalSearchSuggestions", 0); // max. number of search suggestions
 // Disable Crash-Reports
 user_pref("breakpad.reportURL", "");
+// disable sending of crash reports (FF44+)
+user_pref("browser.tabs.crashReporting.sendReport", false);
+user_pref("browser.crashReports.unsubmittedCheck.enabled", false); // (FF51+)
+user_pref("browser.crashReports.unsubmittedCheck.autoSubmit", false); // (FF51-57)
+user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false); // (FF58+)
 // disable Onboarding (FF55+)
 // Onboarding is an interactive tour/setup for new installs/profiles and
 // features. Every time about:home or about:newtab is opened, the onboarding
