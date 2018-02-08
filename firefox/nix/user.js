@@ -632,6 +632,10 @@ user_pref("media.getusermedia.audiocapture.enabled", false);
 // Can be used to fingerprint you and track you. Also, just want to disable face
 // detection, and control of my webcam
 user_pref("camera.control.face_detection.enabled", false);
+// 2024: set a default permission for Camera/Microphone (FF58+)
+// 0=always ask (default), 1=allow, 2=block
+user_pref("permissions.default.camera", 2);
+user_pref("permissions.default.microphone", 2);
 // disable canvas capture stream
 user_pref("canvas.capturestream.enabled", false);
 // disable camera image capture
@@ -759,6 +763,10 @@ user_pref("dom.archivereader.enabled", false);
 // force FF to tell you if a website asks to store data for offline use
 user_pref("offline-apps.allow_by_default", false);
 user_pref("browser.offline-apps.notify", true);
+// 2427: disable Shared Memory (Spectre mitigation)
+// [1] https://github.com/tc39/ecmascript_sharedmem/blob/master/TUTORIAL.md
+// [2] https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/
+user_pref("javascript.options.shared_memory", false);
 // *****************************************************************************
 
 
@@ -803,6 +811,11 @@ user_pref("dom.keyboardevent.dispatch_during_composition", false);
 // fingerprinting attack vector - leaks screen res & actual screen coordinates
 // WARNING: If you use touch screens, reset this to the default
 user_pref("dom.w3c_touch_events.enabled", 0);
+// Set a default permission for Location (FF58+)
+// [SETTING] to add site exceptions: Page Info>Permissions>Access Your Location
+// [SETTING] to manage site exceptions: Options>Privacy>Permissions>Location>Settings
+// 0=always ask (default), 1=allow, 2=block
+user_pref("permissions.default.geo", 2);
 // 2510: disable Web Audio API (FF51+)
 // disables this api which is basically never used legitimately, but is used to
 // track and fingerprint you sometimes.
