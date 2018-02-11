@@ -1,5 +1,10 @@
 # Mozilla Hardening
 
+This repo was last updated when the ghacks-user-js repo was at commit:
+08a5410b88b9ae5a71614ed7dffb4bd2d805e6a5
+
+## Intro
+
 Please remember to backup your prefs.js file before adding the user.js file to
 your profile! If these configs break websites that you frequent it will be
 harder to undo if you don't backup the prefs.js file.
