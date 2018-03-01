@@ -66,12 +66,12 @@ user_pref("ghacks_user.js.parrot", "GEOLOCATION BEGIN");
 // Gives away your location to the world
 user_pref("geo.enabled", false);
 // Don't locate me google. Set it to a blank string
-user_pref("geo.wifi.uri", "https://127.0.0.1");
+user_pref("geo.wifi.uri", "data:,");
 // disables Firefox from logging geolocation requests
 user_pref("geo.wifi.logging.enabled", false); // (hidden pref)
 // This is for firefox to find out where you are to give you a location
 // appropriate search engine. Set it to an empty string to remove feature
-user_pref("browser.search.geoip.url", "");
+user_pref("browser.search.geoip.url", "data:,");
 // requests have a timeout of 1 in order to minimize giving away location
 user_pref("geo.wifi.xhr.timeout", 1);
 user_pref("browser.search.geoip.timeout", 1);
@@ -89,7 +89,7 @@ user_pref("ghacks_user.js.parrot", "QUIETFOX1 BEGIN");
 user_pref("toolkit.telemetry.unified", false);
 user_pref("toolkit.telemetry.enabled", false);
 user_pref("toolkit.telemetry.unifiedIsOptIn", true); // (hidden pref)
-user_pref("toolkit.telemetry.server", "");
+user_pref("toolkit.telemetry.server", "data:,");
 user_pref("toolkit.telemetry.archive.enabled", false);
 user_pref("toolkit.telemetry.cachedClientID", "");
 user_pref("toolkit.telemetry.newProfilePing.enabled", false); // (FF55+)
@@ -105,8 +105,8 @@ user_pref("datareporting.policy.dataSubmissionEnabled", false);
 // POSSIBLY DEPRECATED
 user_pref("browser.selfsupport.enabled", false); // (hidden pref)
 // POSSIBLY DEPRECATED
-user_pref("browser.selfsupport.url", "");
-// Disable experiemts. Experiments allow Firefox to download and run restartless
+user_pref("browser.selfsupport.url", "data:,");
+// Disable experiments. Experiments allow Firefox to download and run restartless
 // addons
 user_pref("experiments.enabled", false);
 user_pref("experiments.manifest.uri", "");
@@ -120,7 +120,7 @@ user_pref("browser.ping-centre.telemetry", false);
 // https://bugzilla.mozilla.org/show_bug.cgi?id=1181644
 user_pref("browser.urlbar.maxHistoricalSearchSuggestions", 0); // max. number of search suggestions
 // Disable Crash-Reports
-user_pref("breakpad.reportURL", "");
+user_pref("breakpad.reportURL", "data:,");
 // disable sending of crash reports (FF44+)
 user_pref("browser.tabs.crashReporting.sendReport", false);
 user_pref("browser.crashReports.unsubmittedCheck.enabled", false); // (FF51+)
@@ -156,8 +156,8 @@ user_pref("browser.library.activity-stream.enabled", false); // (FF57+)
 // disable "Snippets" (Mozilla content shown on about:home screen) MUST use
 // HTTPS - arbitrary content injected into this page via http opens up MiTM
 // attacks
-user_pref("browser.aboutHomeSnippets.updateUrl", "https://127.0.0.1");
-// disable "Pocket" (third party "save for later" service) & remove urls for
+user_pref("browser.aboutHomeSnippets.updateUrl", "data:,");
+// disable "Pocket" (third party "save for later" service) & remove URLs for
 // good measure
 // NOTE: Important: Remove the pocket icon from your toolbar first
 user_pref("extensions.pocket.enabled", false);
@@ -196,7 +196,7 @@ user_pref("privacy.trackingprotection.ui.enabled", true);
 // disable SSL Error Reporting - PRIVACY
 user_pref("security.ssl.errorReporting.automatic", false);
 user_pref("security.ssl.errorReporting.enabled", false);
-user_pref("security.ssl.errorReporting.url", "");
+user_pref("security.ssl.errorReporting.url", "data:,");
 // disable TLS1.3 0-RTT (round-trip time) (FF51+)
 // 0-RTT is meant for visitors who have recently visited a site or are resuming
 // a previous connection. For these resumed connections, standard TLS 1.3 is
@@ -694,7 +694,7 @@ user_pref("dom.caches.enabled", false);
 // WARNING: may affect social media sites like Twitter
 user_pref("dom.push.enabled", false);
 user_pref("dom.push.connection.enabled", false);
-user_pref("dom.push.serverURL", "");
+user_pref("dom.push.serverURL", "data:,");
 user_pref("dom.push.userAgentID", "");
 // disable web/push notifications
 // WARNING: may affect social media sites like Twitter
@@ -912,7 +912,7 @@ user_pref("general.useragent.compatMode.firefox", false);
 // disable UITour backend so there is no chance that a remote page can use it
 // Allows a site to change the browser UI to some extent
 user_pref("browser.uitour.enabled", false);
-user_pref("browser.uitour.url", "");
+user_pref("browser.uitour.url", "data:,");
 // disable remote JAR files being opened, regardless of content type
 user_pref("network.jar.block-remote-files", true);
 // prevent accessibility services from accessing your browser
