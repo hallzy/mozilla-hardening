@@ -35,7 +35,7 @@
 // Cache
 // Ssl / Oscp / Certs / Encryption / Hsts / Hpkp / Https
 // Fonts
-// Headers / Referers
+// Headers / Referrers
 // Plugins
 // Media / Camera / Mic
 // Ui
@@ -69,7 +69,7 @@ user_pref("geo.enabled", false);
 user_pref("geo.wifi.uri", "data:,");
 // disables Firefox from logging geolocation requests
 user_pref("geo.wifi.logging.enabled", false); // (hidden pref)
-// This is for firefox to find out where you are to give you a location
+// This is for Firefox to find out where you are to give you a location
 // appropriate search engine. Set it to an empty string to remove feature
 user_pref("browser.search.geoip.url", "data:,");
 // requests have a timeout of 1 in order to minimize giving away location
@@ -112,7 +112,7 @@ user_pref("experiments.enabled", false);
 user_pref("experiments.manifest.uri", "");
 user_pref("experiments.supported", false);
 user_pref("experiments.activeExperiment", false);
-// Disable silent opt-in of experiemnts
+// Disable silent opt-in of experiments
 user_pref("network.allow-experiments", false);
 // disable PingCentre telemetry (used in several system extensions) (FF57+)
 user_pref("browser.ping-centre.telemetry", false);
@@ -135,7 +135,7 @@ user_pref("browser.onboarding.enabled", false);
 // Web Compatibility Reporter adds a "Report Site Issue" button to send data to
 // Mozilla
 user_pref("extensions.webcompat-reporter.enabled", false);
-// This makes it so that firefox does not give you recommended pages on a new
+// This makes it so that Firefox does not give you recommended pages on a new
 // tab screen
 user_pref("browser.newtabpage.enabled", false);
 user_pref("browser.newtab.preload", false);
@@ -165,7 +165,7 @@ user_pref("extensions.pocket.api", "");
 user_pref("extensions.pocket.site", "");
 user_pref("extensions.pocket.oAuthConsumerKey", "");
 // Just disable all social media integration. Integration, meaning a sidebar of
-// firefox that always shows your social media stuff.
+// Firefox that always shows your social media stuff.
 user_pref("social.directories", "");
 user_pref("social.whitelist", "");
 user_pref("social.remote-install.enabled", false);
@@ -187,7 +187,7 @@ user_pref("services.sync.enabled", false); // (hidden pref)
 // *** QUIET FOX2 ***
 // *****************************************************************************
 user_pref("ghacks_user.js.parrot", "QUIETFOX2 BEGIN");
-// Enables tracking protection for regular firefox use. Just like the tracking
+// Enables tracking protection for regular Firefox use. Just like the tracking
 // prevention that is enabled by default in private browsing mode. It blocks
 // known tracking domains by default
 user_pref("privacy.trackingprotection.enabled", true); // all windows pref (not just private)
@@ -213,10 +213,10 @@ user_pref("security.tls.enable_0rtt_data", false); // (FF55+ default true)
 // *** BLOCK IMPLICIT OUTBOUND ***
 // *****************************************************************************
 user_pref("ghacks_user.js.parrot", "IMPLICIT OUTBOUND BEGIN");
-// Firefox also prefetches links of they contain prefetch tags in the html. So
+// Firefox also prefetches links of they contain prefetch tags in the HTML. So
 // disable this stupidness as well.
 user_pref("network.prefetch-next", false);
-// In addition firefox also does a dns prefetch to resolve an address before you
+// In addition Firefox also does a DNS prefetch to resolve an address before you
 // have clicked it. This will disable such a useless feature.
 user_pref("network.dns.disablePrefetch", true);
 user_pref("network.dns.disablePrefetchFromHTTPS", true); // (hidden pref)
@@ -224,7 +224,7 @@ user_pref("network.dns.disablePrefetchFromHTTPS", true); // (hidden pref)
 // pre-connects to those things. Also stores information in a database that can
 // get up to 150MB in size.
 user_pref("network.predictor.enabled", false);
-// When you hover over a link in a web browser, firefox makes a tcp and ssl
+// When you hover over a link in a web browser, Firefox makes a TCP and SSL
 // connection to that address in order to speed up the connection in case you
 // happen to click on it. Spammers can use this by sending emails to you, you
 // check your email in a webmail client, and then the spammer knows your email
@@ -262,7 +262,7 @@ user_pref("browser.fixup.alternate.enabled", false);
 // disable locationbar dropdown - PRIVACY (shoulder surfers,forensics/
 // unattended browser)
 user_pref("browser.urlbar.maxRichResults", 0);
-// display all parts of the url
+// display all parts of the URL
 // why rely on just a visual clue - helps SECURITY
 user_pref("browser.urlbar.trimURLs", false);
 // disable URLbar autofill -  PRIVACY (shoulder surfers, forensics/unattended
@@ -285,7 +285,7 @@ user_pref("browser.sessionhistory.max_entries", 50);
 // Don't change colour for visited hyperlinks (vulnerability exists to leak
 // history)
 user_pref("layout.css.visited_links_enabled", false);
-// disable displaying javascript in history URLs - SECURITY
+// disable displaying JavaScript in history URLs - SECURITY
 // This is default anyways as of Firefox 54.0
 user_pref("browser.urlbar.filter.javascript", true);
 // Disable search bar LIVE search suggestions - Privacy
@@ -315,7 +315,7 @@ user_pref("browser.urlbar.oneOffSearches", false);
 // disable search reset (about:searchreset) (FF51+)
 user_pref("browser.search.reset.enabled", false);
 user_pref("browser.search.reset.whitelist", "");
-// only show english characters in urls. This will prevent me from being fooled
+// only show English characters in URLs. This will prevent me from being fooled
 // by some phishing sites.
 user_pref("network.IDN_show_punycode", true);
 // block top level window data: URIs (FF56+)
@@ -344,7 +344,7 @@ user_pref("ghacks_user.js.parrot", "PASSWORDS BEGIN");
 // This is here in case I want to enable
 // If you do not set this pref then make sure to set a master password to
 // protect your saved passwords. Instructions on how to do this are at the link
-// below, otherwise set the pref below the url.
+// below, otherwise set the pref below the URL.
 // https://support.mozilla.org/en-US/kb/use-master-password-protect-stored-logins
 // user_pref("signon.rememberSignons", false);
 // set how often Mozilla should ask for the master password
