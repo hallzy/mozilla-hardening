@@ -97,6 +97,7 @@ user_pref("toolkit.telemetry.shutdownPingSender.enabled", false); // (FF55+)
 user_pref("toolkit.telemetry.updatePing.enabled", false); // (FF56+)
 user_pref("toolkit.telemetry.bhrPing.enabled", false); // (FF57+) Background Hang Reporter
 user_pref("toolkit.telemetry.firstShutdownPing.enabled", false); // (FF57+)
+user_pref("toolkit.telemetry.hybridContent.enabled", false); // (FF59+)
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("datareporting.healthreport.documentServerURI", ""); // (hidden pref)
 user_pref("datareporting.healthreport.service.enabled", false); // (hidden pref)
@@ -114,6 +115,14 @@ user_pref("experiments.supported", false);
 user_pref("experiments.activeExperiment", false);
 // Disable silent opt-in of experiments
 user_pref("network.allow-experiments", false);
+// disable Normandy/Shield (FF60+)
+// Shield is an telemetry system (including Heartbeat) that can also push and
+// test "recipes"
+// https://wiki.mozilla.org/Firefox/Shield
+// https://github.com/mozilla/normandy
+user_pref("app.normandy.enabled", false);
+user_pref("app.normandy.api_url", "");
+user_pref("app.shield.optoutstudies.enabled", false);
 // disable PingCentre telemetry (used in several system extensions) (FF57+)
 user_pref("browser.ping-centre.telemetry", false);
 // disable location bar suggesting local search history (FF57+)
@@ -321,6 +330,9 @@ user_pref("network.IDN_show_punycode", true);
 // block top level window data: URIs (FF56+)
 // https://www.wordfence.com/blog/2017/01/gmail-phishing-data-uri/
 user_pref("security.data_uri.block_toplevel_data_uri_navigations", true);
+// disable CSP violation events (FF59+)
+// https://developer.mozilla.org/docs/Web/API/SecurityPolicyViolationEvent
+user_pref("security.csp.enable_violation_events", false);
 // POSSIBLY DEPRECATED: disable Form Autofill (FF54+)
 user_pref("browser.formautofill.enabled", false);
 // disable form @autocomplete (FF32+)
@@ -672,6 +684,9 @@ user_pref("dom.allow_scripts_to_close_windows", false);
 // This is to stop malicious window sizes and screen res leaks etc
 // Also, it is just annoying when websites open up new windows for you.
 user_pref("browser.link.open_newwindow.restriction", 0);
+// block popup windows
+// [SETTING] Options>Privacy & Security>Permissions>Block pop-up windows
+user_pref("dom.disable_open_during_load", true);
 // *****************************************************************************
 
 
@@ -820,6 +835,12 @@ user_pref("permissions.default.geo", 2);
 // disables this api which is basically never used legitimately, but is used to
 // track and fingerprint you sometimes.
 user_pref("dom.webaudio.enabled", false);
+// disable PointerEvents
+// Pointer Events have information like the pressure used when clicking or
+// touching something on a screen and other information that could be considered
+// a fingerprinting vector.
+// https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent
+user_pref("dom.w3c_pointer_events.enabled", false);
 // disable MediaDevices change detection (FF51+) (enabled by default starting
 // FF52+). This triggers an event whenever a media device is added or removed
 // from your computer
@@ -1008,8 +1029,6 @@ user_pref("network.cookie.leave-secure-alone", true);
 // preferences have to be the same
 user_pref("extensions.webextensions.keepStorageOnUninstall", false);
 user_pref("extensions.webextensions.keepUuidOnUninstall", false);
-// Disable HTTP sites from setting cookies with the "secure" directive
-user_pref("network.cookie.leave-secure-alone", true);
 // *****************************************************************************
 
 // *****************************************************************************
@@ -1378,6 +1397,9 @@ user_pref("ghacks_user.js.parrot", "POSSIBLY DEPRECATED BEGIN");
 // I had to add this manually. It seems FF Hello may have been scrapped, but in
 // case it comes back, I added the config anyways
 user_pref("loop.enabled", false);
+// (41+) disable HTTP2 (draft)
+// https://bugzilla.mozilla.org/1132357
+user_pref("network.http.spdy.enabled.http2draft", false);
 // *****************************************************************************
 
 
