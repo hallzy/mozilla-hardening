@@ -123,6 +123,8 @@ user_pref("network.allow-experiments", false);
 user_pref("app.normandy.enabled", false);
 user_pref("app.normandy.api_url", "");
 user_pref("app.shield.optoutstudies.enabled", false);
+user_pref("extensions.shield-recipe-client.enabled", false);
+user_pref("extensions.shield-recipe-client.api_url", "");
 // disable PingCentre telemetry (used in several system extensions) (FF57+)
 user_pref("browser.ping-centre.telemetry", false);
 // disable location bar suggesting local search history (FF57+)
@@ -166,6 +168,9 @@ user_pref("browser.library.activity-stream.enabled", false); // (FF57+)
 // HTTPS - arbitrary content injected into this page via http opens up MiTM
 // attacks
 user_pref("browser.aboutHomeSnippets.updateUrl", "data:,");
+// disable Browser Error Reporter (FF60+)
+user_pref("browser.chrome.errorReporter.enabled", false);
+user_pref("browser.chrome.errorReporter.submitUrl", "");
 // disable "Pocket" (third party "save for later" service) & remove URLs for
 // good measure
 // NOTE: Important: Remove the pocket icon from your toolbar first
@@ -1029,6 +1034,10 @@ user_pref("network.cookie.leave-secure-alone", true);
 // preferences have to be the same
 user_pref("extensions.webextensions.keepStorageOnUninstall", false);
 user_pref("extensions.webextensions.keepUuidOnUninstall", false);
+// Enable warning when websites try to install add-ons
+// [SETTING] Privacy & Security>Permissions>Warn you when websites try to install add-ons
+// [SETTING-ESR52] Security>General>Warn me when sites try to install add-ons
+user_pref("xpinstall.whitelist.required", true); // default: true
 // *****************************************************************************
 
 // *****************************************************************************
