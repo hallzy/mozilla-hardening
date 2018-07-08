@@ -164,6 +164,8 @@ user_pref("browser.ctrlTab.previews", false);
 // Disable Activity Stream (system addon)
 user_pref("browser.newtabpage.activity-stream.enabled", false);
 user_pref("browser.library.activity-stream.enabled", false); // (FF57+)
+// Don't allow Firefox Screenshots to be uploaded to any server.
+user_pref("extensions.screenshots.upload-disabled", true); // (FF60+)
 // disable "Snippets" (Mozilla content shown on about:home screen) MUST use
 // HTTPS - arbitrary content injected into this page via http opens up MiTM
 // attacks
@@ -599,6 +601,12 @@ user_pref("media.block-autoplay-until-in-foreground", true);
 // user_pref("media.gmp-eme-adobe.enabled", false);
 // user_pref("media.gmp-eme-adobe.visible", false);
 // user_pref("media.gmp-eme-adobe.autoupdate", false);
+// disable NPAPI plugins (Add-ons>Plugins)
+// 0=deactivated, 1=ask, 2=enabled
+// [NOTE] ESR52 users should check plugin.state* for other installed NPAPI plugins
+// [NOTE] You can still over-ride individual sites e.g. youtube via site permissions
+user_pref("plugin.state.flash", 0);
+user_pref("plugin.state.java", 0);
 // *****************************************************************************
 
 
@@ -938,7 +946,7 @@ user_pref("general.useragent.compatMode.firefox", false);
 // disable UITour backend so there is no chance that a remote page can use it
 // Allows a site to change the browser UI to some extent
 user_pref("browser.uitour.enabled", false);
-user_pref("browser.uitour.url", "data:,");
+user_pref("browser.uitour.url", "");
 // disable remote JAR files being opened, regardless of content type
 user_pref("network.jar.block-remote-files", true);
 // prevent accessibility services from accessing your browser
@@ -967,6 +975,9 @@ user_pref("network.proxy.autoconfig_url.include_path", false);
 // close bypassing of CSP via image mime types (FF51+)
 // https://bugzilla.mozilla.org/show_bug.cgi?id=1288361
 user_pref("security.block_script_with_wrong_mime", true);
+// disable using UNC (Uniform Naming Convention) paths (FF61+)
+// I am not doing this, so I set it to false. Here just in case.
+user_pref("network.file.disable_unc_paths", false); // (hidden pref)
 // *****************************************************************************
 
 
