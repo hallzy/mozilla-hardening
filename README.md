@@ -20,7 +20,85 @@ for me, or would eliminate the use of websites that I use on a daily basis.
 
 See the user.js file for my about:config settings.
 
+For Linux, I have also provided a script in `firefox/nix/` that will globally
+install Firefox webextensions for the computer.
+
 ## Usage
+
+### Install Extensions Script
+
+There are 4 ways to use this script:
+
+1. Provide the script with a URL to the XPI file for the extension
+2. Provide the name of the extension
+3. Provide a pre-downloaded XPI file for the extension
+4. Populate the `extensions` array in the script
+
+#### Providing URL
+
+```bash
+$ ./install_extensions.sh https://addons.mozilla.org/firefox/downloads/file/972162/noscript_security_suite-10.1.8.2-an+fx.xpi?src=dp-btn-primary
+```
+
+This will download this specific XPI file for you, rename it to the extension's
+ID, and move it to the correct folder. All you have to do after running this
+command is restart Firefox.
+
+#### Providing Extension Name
+
+```bash
+$ ./install_extensions.sh noscript
+```
+
+This will download the latest XPI file for this extension for you, rename it to
+the extension's ID, and move it to the correct folder. All you have to do after
+running this command is restart Firefox.
+
+Note that the name you provide must be the same as what is in the URL for this
+extension. Example, if you google `noscript` and go to the Firefox addons page,
+you will see that the URL for this extension is:
+`https://addons.mozilla.org/en-US/firefox/addon/noscript/`.
+Here we can see that the extension name is `noscript`.
+
+#### Providing File
+
+```bash
+$ ./install_extensions.sh noscript.xpi
+```
+
+If you have already downloaded the XPI file that you want, just provide the
+script with an XPI file (must have the `.xpi` extension).
+
+This will rename it to the extension's ID, and move it to the correct folder.
+All you have to do after running this command is restart Firefox.
+
+#### Populating the extensions array
+
+If you open the script you will see an extensions array at the top of the file
+that looks something like this:
+
+```bash
+declare -a extensions=(
+"noscript"
+"umatrix"
+"ublock-origin"
+"canvasblocker"
+)
+```
+
+You can change this to contain any extensions you want (so long as the extension
+names are the names given in the URL of the addon page for that extension).
+
+If you want to use this array for your extension installation, run the script
+like below:
+
+```bash
+$ ./install_extensions.sh
+```
+
+This will download the latest version of each extension in the `extensions`
+array, rename them to their IDs, and move them to the correct folder.  All you
+have to do after running this command is restart Firefox.
 
 ### Windows VS Non-Windows Version
 
