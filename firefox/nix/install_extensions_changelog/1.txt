@@ -1,0 +1,3 @@
+  * Reorganized the script
+  * Added a feature to allow updating of the script upon executing.
+  * Updating the script now copies over your extensions in the extensions array.

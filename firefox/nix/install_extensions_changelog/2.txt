@@ -1,0 +1,1 @@
+  * Added changelogs to the script update output.

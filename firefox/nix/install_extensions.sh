@@ -8,7 +8,7 @@ declare -a extensions=(
 "canvasblocker"
 )
 
-readonly VERSION=1
+readonly VERSION=2
 
 latest="https://addons.mozilla.org/firefox/downloads/latest/"
 
@@ -77,7 +77,7 @@ function getUniqueFilename() {
 # getNewVersionNumber#{{{
 function getNewVersionNumber() {
   local newVersionNumber
-  newVersionNumber=$(grep "VERSION=" "${1}" | \
+  newVersionNumber=$(grep "readonly VERSION=" "${1}" | head -n 1 | \
                      sed 's/^.*VERSION=\(.*\)$/\1/g')
   if [ -z "${newVersionNumber}" ]; then
     newVersionNumber=0
@@ -118,6 +118,38 @@ function get_updated_script() {
 }
 #}}}
 
+# get_changelog
+function get_changelog() {
+  local oldVersion
+  local newVersion
+  local url
+  local changelog
+  oldVersion="${1}"
+  newVersion="${2}"
+  url="https://raw.githubusercontent.com/hallzy/mozilla-hardening/master"
+  url="${url}/firefox/nix/install_extensions_changelog/"
+
+  if [ "${oldVersion}" -eq 0 ]; then
+    oldVersion=1
+  fi
+  if [ "${newVersion}" -eq 0 ]; then
+    newVersion=1
+  fi
+
+  for i in $(seq $newVersion -1 $oldVersion); do
+    changelog=$(getUniqueFilename "changelog")
+    wget -O "${changelog}" "${url}/${i}.txt" -o /dev/null
+    if [ $? -ne 0 ]; then
+      echo "Error getting changelog for version ${i}"
+    else
+      echo "Version ${1}"
+      cat ${changelog}
+    fi
+    rm ${changelog}
+  done
+
+}
+
 # check_for_updates#{{{
 function check_for_updates() {
   echo "Checking for Updates..."
@@ -132,6 +164,8 @@ function check_for_updates() {
   local newVersionNumber
   newVersionNumber=$(getNewVersionNumber "${tmpFile}")
 
+  echo $newVersionNumber
+
   if [ "${newVersionNumber}" -le "${VERSION}" ]; then
     echo "No updates available. Continuing with extension install."
     return
@@ -142,6 +176,7 @@ function check_for_updates() {
     case $yn in
       Yes )
         get_updated_script "${tmpFile}"
+        get_changelog "${VERSION}" "${newVersionNumber}"
         exit 0
         ;;
       No )
