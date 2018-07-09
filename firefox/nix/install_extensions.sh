@@ -160,9 +160,9 @@ function get_changelog() {
       echo "Error getting changelog for version ${i}"
     else
       echo "Version ${i}"
-      cat ${changelog}
+      cat "${changelog}"
     fi
-    rm ${changelog}
+    rm "${changelog}"
   done
 
 }
