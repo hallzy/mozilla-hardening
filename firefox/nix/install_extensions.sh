@@ -11,6 +11,7 @@ declare -a extensions=(
 readonly VERSION=2
 
 latest="https://addons.mozilla.org/firefox/downloads/latest/"
+PATH_FIREFOX="/usr/lib/firefox-addons/extensions"
 
 # do_install#{{{
 function do_install() {
@@ -28,7 +29,7 @@ function do_install() {
   fi
 
   # Check that the file actually exists on disk
-  ls "${1}" 2> /dev/null
+  ls "${1}" > /dev/null 2>&1
   if [ $? -ne 0 ]; then
     echo "File '${providedFile}' doesn't exist."
     return
@@ -49,12 +50,25 @@ function do_install() {
 
   echo "Addon ID: ${addonID}"
 
-  local PATH_FIREFOX="/usr/lib/firefox-addons/extensions"
-
   # Move and rename the file to install it globally.
   sudo mv "${filename}" "${PATH_FIREFOX}/${addonID}"
+  if [ $? -ne 0 ]; then
+    echo "Failed to move file to destination directory. Skipping Extension."
+    rm "${filename}"
+    return
+  fi
   sudo chown -R root:root "${PATH_FIREFOX}/${addonID}"
+  if [ $? -ne 0 ]; then
+    echo "Failed to change ownership of extension file. Skipping Extension."
+    rm "${PATH_FIREFOX}/${addonID}"
+    return
+  fi
   sudo chmod -R a+rX "${PATH_FIREFOX}/${addonID}"
+  if [ $? -ne 0 ]; then
+    echo "Failed to change permissions of extension file. Skipping Extension."
+    rm "${PATH_FIREFOX}/${addonID}"
+    return
+  fi
 }
 #}}}
 
@@ -169,6 +183,7 @@ function check_for_updates() {
 
   if [ "${newVersionNumber}" -le "${VERSION}" ]; then
     echo "No updates available. Continuing with extension install."
+    rm "${tmpFile}"
     return
   fi
 
@@ -206,6 +221,13 @@ function main() {
         ;;
     esac
   done
+
+  # Check to make sure that the extensions directory exists
+  ls "${PATH_FIREFOX}" > /dev/null 2>&1
+  if [ $? -ne 0 ]; then
+    echo "Global Extensions directory does not exist: '${PATH_FIREFOX}'"
+    return
+  fi
 
   # If no argument provided, then use the extensions array
   if [ -z "${1}" ]; then
