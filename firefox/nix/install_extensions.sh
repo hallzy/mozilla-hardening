@@ -99,8 +99,8 @@ function get_updated_script() {
   done
   newName=$(getUniqueFilename "${newName}")
   mv "${tmpFile}" "${newName}"
-  echo "Saved the new script file as: ${newName}"
-  echo "Not installing extensions. Please run again, or use new script."
+  echo -e "Saved the new script file as: ${newName}\n"
+  echo -e "Not installing extensions. Please run again, or use new script.\n"
 
   # Get the user extensions from this currently running script into a string.
   local userExt
@@ -125,6 +125,7 @@ function get_changelog() {
   local url
   local changelog
   oldVersion="${1}"
+  oldVersion=$((oldVersion+1))
   newVersion="${2}"
   url="https://raw.githubusercontent.com/hallzy/mozilla-hardening/master"
   url="${url}/firefox/nix/install_extensions_changelog/"
@@ -136,13 +137,15 @@ function get_changelog() {
     newVersion=1
   fi
 
+  echo "Changelog:"
+  echo -e "==========\n"
   for i in $(seq $newVersion -1 $oldVersion); do
     changelog=$(getUniqueFilename "changelog")
     wget -O "${changelog}" "${url}/${i}.txt" -o /dev/null
     if [ $? -ne 0 ]; then
       echo "Error getting changelog for version ${i}"
     else
-      echo "Version ${1}"
+      echo "Version ${i}"
       cat ${changelog}
     fi
     rm ${changelog}
@@ -152,7 +155,7 @@ function get_changelog() {
 
 # check_for_updates#{{{
 function check_for_updates() {
-  echo "Checking for Updates..."
+  echo -e "Checking for Updates...\n"
   local url="https://raw.githubusercontent.com/hallzy/mozilla-hardening/master"
   url="${url}/firefox/nix/install_extensions.sh"
 
@@ -163,8 +166,6 @@ function check_for_updates() {
 
   local newVersionNumber
   newVersionNumber=$(getNewVersionNumber "${tmpFile}")
-
-  echo $newVersionNumber
 
   if [ "${newVersionNumber}" -le "${VERSION}" ]; then
     echo "No updates available. Continuing with extension install."
