@@ -34,6 +34,29 @@ There are 4 ways to use this script:
 3. Provide a pre-downloaded XPI file for the extension
 4. Populate the `extensions` array in the script
 
+Use the `--help` flag for the help dialog:
+
+```bash
+$ ./install_extensions.sh --help
+```
+
+#### Flags
+
+```bash
+$ ./install_extensions.sh --no-update noscript
+$ ./install_extensions.sh --update umatrix
+$ ./install_extensions.sh ublock-origin
+```
+
+The first example will install the `noscript` extension and will NOT check for
+updates or ask you to check for updates.
+
+The second example will install the `umatrix` extension and WILL check for
+updates but will not ask you if you want to check for updates.
+
+The third example will install the `ublock-origin` extension but will ask you if
+you want to check for updates before checking.
+
 #### Providing URL
 
 ```bash

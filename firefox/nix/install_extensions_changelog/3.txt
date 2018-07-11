@@ -1,0 +1,6 @@
+  * Added a help (Use --help)
+  * Added a "--no-update" switch which will make the script run without asking
+    to check for updates, and without checking for updates
+  * Added a "--update" switch which will make the script run without asking
+    to check for updates, but will check for updates.
+  * Various validation checks in the code

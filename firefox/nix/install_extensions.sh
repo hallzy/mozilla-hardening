@@ -8,7 +8,7 @@ declare -a extensions=(
 "canvasblocker"
 )
 
-readonly VERSION=2
+readonly VERSION=3
 
 latest="https://addons.mozilla.org/firefox/downloads/latest/"
 PATH_FIREFOX="/usr/lib/firefox-addons/extensions"
@@ -17,6 +17,8 @@ PATH_FIREFOX="/usr/lib/firefox-addons/extensions"
 function do_install() {
   if [ -z "${1}" ]; then
     echo "Missing argument."
+    echo ""
+    show_help
     return
   fi
 
@@ -32,6 +34,7 @@ function do_install() {
   ls "${1}" > /dev/null 2>&1
   if [ $? -ne 0 ]; then
     echo "File '${providedFile}' doesn't exist."
+    show_help
     return
   fi
 
@@ -132,7 +135,7 @@ function get_updated_script() {
 }
 #}}}
 
-# get_changelog
+# get_changelog #{{{
 function get_changelog() {
   local oldVersion
   local newVersion
@@ -166,6 +169,7 @@ function get_changelog() {
   done
 
 }
+#}}}
 
 # check_for_updates#{{{
 function check_for_updates() {
@@ -205,22 +209,92 @@ function check_for_updates() {
 }
 #}}}
 
+function show_help() {
+  echo "install-extensions - Global Firefox Webextension Installer"
+  echo ""
+  echo "Usage:"
+  echo "  ./install-extensions.sh [--no-update|--update|] [xpi_url|extension|]"
+  echo ""
+  echo ""
+  echo "  xpi_url      Is the URL to a specific XPI file you would like to"
+  echo "               install globally"
+  echo "  extension    Is the extension name as seen in the Firefox Addons URL"
+  echo "  no arg       If no argument is given, the script will use the"
+  echo "               extensions array variable at the top of this script."
+  echo ""
+  echo ""
+  echo "  --no-update    Won't check for updates and won't ask to check for"
+  echo "                 updates."
+  echo "  --update       Will check for updates but won't ask to check."
+  echo "  no switch      If no switch is given then the script will ask you if"
+  echo "                 you want to check for updates, and will ask again if"
+  echo "                 you would like to download the updates"
+  echo ""
+}
+
+NO_UPDATE="false"
+UPDATE="false"
+shifts=0;
+
+# Check for --help
+if [ "$1" = "--help" ]; then
+  show_help
+  exit 0
+fi
+
+# Iterate through the script args to look for switches
+for var in "$@"; do
+  case "${var}" in
+    "--no-update" )
+      NO_UPDATE="true"
+      ;;
+    "--update" )
+      UPDATE="true"
+      ;;
+    * )
+      break
+      ;;
+  esac
+  shifts=$((shifts+1))
+done
+
+# We can't have NO_UPDATE and UPDATE at the same time
+if [ "$NO_UPDATE" = 'true' ] && [ "$UPDATE" = "true" ]; then
+  NO_UPDATE="false"
+  UPDATE="false"
+fi
+
+shift ${shifts}
+
+
 # main#{{{
 function main() {
-  # Do you want to check for updates?
-  echo "Do you want to check for updates to this script?"
-  select yn in "Yes" "No"; do
-    case $yn in
-      Yes )
-        check_for_updates
-        # If updated, the script exits here
-        break;
-        ;;
-      No )
-        break;
-        ;;
-    esac
-  done
+  # If the update flag is set, then check for updates right away without asking
+  if [ "$NO_UPDATE" = "false" ] && [ "$UPDATE" = 'true' ]; then
+    echo "update check"
+    # check_for_updates
+  # If no flags are set, then ask the user
+  elif [ "$NO_UPDATE" = "false" ] && [ "$UPDATE" = 'false' ]; then
+    # Do you want to check for updates?
+    echo "Do you want to check for updates to this script?"
+    select yn in "Yes" "No"; do
+      case $yn in
+        Yes )
+          echo "Update Check"
+          # check_for_updates
+          # If updated, the script exits here
+          break;
+          ;;
+        No )
+          break;
+          ;;
+      esac
+    done
+  fi
+  # If NO_UPDATE is set then we won't look for updates at all
+
+  echo "doing rest of script"
+  exit 0;
 
   # Check to make sure that the extensions directory exists
   ls "${PATH_FIREFOX}" > /dev/null 2>&1
