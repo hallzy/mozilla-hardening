@@ -271,8 +271,7 @@ shift ${shifts}
 function main() {
   # If the update flag is set, then check for updates right away without asking
   if [ "$NO_UPDATE" = "false" ] && [ "$UPDATE" = 'true' ]; then
-    echo "update check"
-    # check_for_updates
+    check_for_updates
   # If no flags are set, then ask the user
   elif [ "$NO_UPDATE" = "false" ] && [ "$UPDATE" = 'false' ]; then
     # Do you want to check for updates?
@@ -280,8 +279,7 @@ function main() {
     select yn in "Yes" "No"; do
       case $yn in
         Yes )
-          echo "Update Check"
-          # check_for_updates
+          check_for_updates
           # If updated, the script exits here
           break;
           ;;
@@ -292,9 +290,6 @@ function main() {
     done
   fi
   # If NO_UPDATE is set then we won't look for updates at all
-
-  echo "doing rest of script"
-  exit 0;
 
   # Check to make sure that the extensions directory exists
   ls "${PATH_FIREFOX}" > /dev/null 2>&1
